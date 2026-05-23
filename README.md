@@ -6,6 +6,7 @@ Automated daily pipeline that scrapes Indian IT job market news, generates an AI
 
 Every day at 12:01 AM IST:
 
+
 1. **Scrapes** IT job market headlines from RSS feeds (ET, Moneycontrol, YourStory, Inc42, TechCrunch)
 2. **Filters** for relevance to Indian IT job seekers and deduplicates
 3. **Generates** a structured brief via Claude API — each headline explained from a job seeker's perspective
