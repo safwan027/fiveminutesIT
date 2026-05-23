@@ -73,7 +73,10 @@ jobs:
 
           # Commit only if there's something staged
           git diff --cached --quiet || git commit -m "brief: $(date -u +%Y-%m-%d)"
-          git push
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git push
 
       - name: Upload pipeline log
         uses: actions/upload-artifact@v4
