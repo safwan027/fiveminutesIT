@@ -60,49 +60,58 @@ body {{
 .site-header {{
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 0 24px;
 }}
-.header-inner {{
-  max-width: 760px;
-  margin: 0 auto;
+.header-top {{
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 16px 0 0;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
 }}
-.site-title {{
-  font-family: var(--font-display);
-  font-size: 20px;
-  color: var(--text);
-  text-decoration: none;
-  letter-spacing: -0.02em;
-}}
-.site-tagline {{ font-size: 12px; color: var(--hint); margin-top: 2px; }}
-.nav {{
+.header-left {{
   display: flex;
-  gap: 2px;
-  margin-top: 12px;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 500;
 }}
-.tab {{
-  font-family: var(--font-body);
+.e-paper {{ color: #b20710; font-weight: bold; text-decoration: none; }}
+.site-logo {{
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: #000;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}}
+.header-right {{
+  display: flex;
+  gap: 16px;
+  align-items: center;
   font-size: 13px;
   font-weight: 500;
-  color: var(--muted);
+}}
+.subscribe-btn {{
+  background: #b20710;
+  color: #fff;
+  padding: 6px 16px;
   text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 6px 6px 0 0;
-  border: 1px solid transparent;
-  border-bottom: none;
-  transition: color 0.15s;
+  border-radius: 2px;
 }}
-.tab:hover {{ color: var(--text); }}
-.tab.active {{
-  color: var(--text);
-  background: var(--bg);
-  border-color: var(--border);
-  border-bottom-color: var(--bg);
-  margin-bottom: -1px;
+.header-bottom {{
+  display: flex;
+  justify-content: center;
+  padding: 12px 24px;
 }}
+.nav {{
+  display: flex;
+  gap: 32px;
+}}
+.tab {{
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+}}
+.tab.active {{ font-weight: bold; border-bottom: 2px solid #000; }}
 .main {{
   max-width: 760px;
   margin: 0 auto;
@@ -221,19 +230,27 @@ footer {{ border-top: 1px solid var(--border); padding: 24px; text-align: center
 </head>
 <body>
 <header class="site-header">
-  <div class="header-inner">
-    <div>
-      <a href="index.html" class="site-title">India IT Brief</a>
-      <div class="site-tagline">Daily job market signals for Indian IT professionals</div>
+  <div class="header-top">
+    <div class="header-left">
+      <span style="color: var(--text);">May 23, 2026</span>
+      <a href="#" class="e-paper">e-Paper</a>
+    </div>
+    <a href="index.html" class="site-logo">INDIA IT BRIEF</a>
+    <div class="header-right">
+      <a href="#" style="color:var(--text);text-decoration:none">eBooks</a>
+      <a href="#" style="color:var(--text);text-decoration:none">LOGIN</a>
+      <a href="#" class="subscribe-btn">SUBSCRIBE</a>
     </div>
   </div>
-  <div class="nav">{nav}</div>
+  <div class="header-bottom">
+    <div class="nav">{nav}</div>
+  </div>
 </header>
 <main class="main">
 {body}
 </main>
 <footer>
-  Built with Claude API · Data from public RSS feeds · Updated daily at 12:01 AM IST
+ 
 </footer>
 <script>
 document.querySelectorAll('.card-header').forEach(h => {{
