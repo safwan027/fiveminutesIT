@@ -65,11 +65,7 @@ Required:
 Optional but recommended:
 - `ALERT_EMAIL` — email address for failure alerts
 - `RESEND_API_KEY` — from [resend.com](https://resend.com) (free 100 emails/day)
-- `WEBSITE_REPO_PATH` — path to your website git repo for auto-publishing
-
-
-
-
+<!-- - `WEBSITE_REPO_PATH` — path to your website git repo for auto-publishing -->
 
 
 ### 3. Test manually
@@ -79,6 +75,14 @@ source .env
 python3 run.py
 ```
 This runs the full pipeline once and writes output to `output/site/`.
+
+
+
+
+
+
+
+
 
 
 
@@ -112,6 +116,18 @@ The rendered HTML files in `output/site/` are self-contained — no framework, n
 **Netlify**: Drag-drop the `output/site/` folder, or connect the repo and set publish directory to `output/site`. -->
 
 **Manual**: Copy the three HTML files to any static host.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

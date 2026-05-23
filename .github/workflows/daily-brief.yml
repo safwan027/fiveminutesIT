@@ -58,7 +58,7 @@ jobs:
       - name: Commit and push site files
         run: |
           git config user.name "IT Brief Bot"
-          git config user.email "brief-bot@users.noreply.github.com"
+          git config user.email "safwannasar0@gmail.com"
 
           git add output/site/index.html
 
