@@ -48,7 +48,7 @@ else
     echo "✓ data/context.json already exists"
 fi
 
-# ── Cron setup instructions ────────────────────────────────
+# ── Taskscheduler (windows) setup instructions ────────────────────────────────
 echo ""
 echo "================================================="
 echo " Setup complete."

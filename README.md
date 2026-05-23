@@ -106,9 +106,9 @@ The workflow runs automatically at 12:01 AM IST daily.
 
 The rendered HTML files in `output/site/` are self-contained — no framework, no build step.
 
-**GitHub Pages**: Point GitHub Pages to the `output/site/` directory.
+<!-- **GitHub Pages**: Point GitHub Pages to the `output/site/` directory.
 
-**Netlify**: Drag-drop the `output/site/` folder, or connect the repo and set publish directory to `output/site`.
+**Netlify**: Drag-drop the `output/site/` folder, or connect the repo and set publish directory to `output/site`. -->
 
 **Manual**: Copy the three HTML files to any static host.
 
