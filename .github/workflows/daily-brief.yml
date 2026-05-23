@@ -61,7 +61,7 @@ jobs:
           git config user.email "brief-bot@users.noreply.github.com"
 
           git add output/site/index.html
-          git add context.json
+          git add data/context.json
 
           # Only add para-a and changelog if they changed
           if git diff --cached --quiet output/site/para-a.html 2>/dev/null; then
