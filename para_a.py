@@ -74,14 +74,35 @@ No preamble, no explanation, no markdown fences."""
     for attempt in range(1, 4):
         try:
             print(f"  Para A update call (attempt {attempt}/3)...")
-            response = client.messages.create(
+            # response = client.chat.completions.create(
+            #     model="gemini-2.5-flash",
+            #     messages=[{"role": "user", "content": prompt}],
+            # )
+            # raw = response.choices[0].message.content
+            # clean = re.sub(r"```json\s*|```\s*", "", raw).strip()
+            # new_sections_raw = json.loads(clean)
+
+            response = client.chat.completions.create(
                 model="gemini-2.5-flash",
-                max_tokens=1000,
                 messages=[{"role": "user", "content": prompt}],
             )
-            raw = response.content[0].text
-            clean = re.sub(r"```json\s*|```\s*", "", raw).strip()
-            new_sections_raw = json.loads(clean)
+            raw = response.choices[0].message.content
+
+            # 1. Look specifically for anything trapped between ```json and ```
+            # The DOTALL flag ensures it captures line breaks too.
+            match = re.search(r"```json\s*(.*?)\s*```", raw, re.DOTALL)
+            
+            if match:
+                clean = match.group(1).strip()
+            else:
+                # Fallback: if the model forgot markdown block entirely and just returned pure JSON
+                clean = raw.strip()
+            
+            try:
+                new_sections_raw = json.loads(clean)
+            except json.JSONDecodeError as e:
+                print(f"Failed to parse JSON. Raw output was: {raw}")
+                raise e
 
             # Validate structure
             if not isinstance(new_sections_raw, list):

@@ -1,0 +1,93 @@
+{
+  "last_run_date": "2026-05-22",
+  "last_run_status": "success",
+  "last_run_headline_count": 15,
+  "pipeline_version": "1.0.0",
+  "headline_hashes": {},
+  "source_last_seen": {
+    "Economic Times Tech": "2026-05-23",
+    "Moneycontrol Tech": "2026-05-23",
+    "YourStory": "2026-05-23",
+    "Inc42": "2026-05-23",
+    "TechCrunch": "2026-05-23"
+  },
+  "sentiment_history": [],
+  "sentiment_7d_avg": -0.086,
+  "sentiment_7d_std": 0.085,
+  "sentiment_label_counts": {
+    "positive": 0,
+    "negative": 0,
+    "cautious": 7,
+    "neutral": 2
+  },
+  "para_a": {
+    "version": 1,
+    "last_updated": null,
+    "sections": [
+      {
+        "id": "bifurcation",
+        "title": "The structural split",
+        "content": "India's IT sector is not collapsing � it is bifurcating. The traditional IT services model, which absorbed hundreds of thousands of freshers for routine coding and testing work, is contracting. Meanwhile, Global Capability Centres (GCCs) of multinationals are building deep engineering teams in Bengaluru, Hyderabad, and Pune � paying 12�30% more than legacy IT firms.",
+        "last_modified_date": null
+      },
+      {
+        "id": "fresher_market",
+        "title": "Fresher pipeline",
+        "content": "Fresher hiring among tier-1 IT firms has fallen sharply from the FY22 peak of 6 lakh combined. Infosys remains the lone bright spot. Wipro and Tech Mahindra have deferred hundreds of joining letters. Campus hiring is recovering but concentrated at premier institutes and in AI/cloud roles.",
+        "last_modified_date": null
+      },
+      {
+        "id": "opportunity_map",
+        "title": "Where opportunities actually are",
+        "content": "GCCs are set to add 3�4 lakh net new jobs in 2026. India's startup ecosystem � Razorpay, Zepto, Meesho, Swiggy � is actively hiring. The semiconductor mission targets 10 lakh jobs. Tier-2 city IT hubs (Kochi, Coimbatore, Indore) are growing with lower competition. Mid-career developers with 3�7 years experience are in a seller's market.",
+        "last_modified_date": null
+      },
+      {
+        "id": "skills_signal",
+        "title": "Skills that change your odds",
+        "content": "AI fluency � using GitHub Copilot, integrating LLM APIs, understanding RAG pipelines � is now explicitly required at Accenture, TCS, and Infosys JDs. Cloud, DevOps, and data engineering roles are growing 7% YoY while generic developer roles contract. Tailored keyword-optimised resumes are mandatory as ATS threshold has risen to 75�80%.",
+        "last_modified_date": null
+      }
+    ],
+    "trigger_headline_ids": [],
+    "shift_log": []
+  },
+  "changelog": [],
+  "config": {
+    "shift_threshold": 0.15,
+    "min_headlines": 5,
+    "sentiment_window_days": 7,
+    "sources": [
+      {
+        "name": "Economic Times Tech",
+        "url": "https://economictimes.indiatimes.com/tech/rssfeeds/13357270.cms",
+        "active": true,
+        "geo_tag": "India"
+      },
+      {
+        "name": "Moneycontrol Tech",
+        "url": "https://www.moneycontrol.com/rss/technology.xml",
+        "active": true,
+        "geo_tag": "India"
+      },
+      {
+        "name": "YourStory",
+        "url": "https://yourstory.com/feed",
+        "active": true,
+        "geo_tag": "India"
+      },
+      {
+        "name": "Inc42",
+        "url": "https://inc42.com/feed/",
+        "active": true,
+        "geo_tag": "India"
+      },
+      {
+        "name": "TechCrunch",
+        "url": "https://techcrunch.com/feed/",
+        "active": true,
+        "geo_tag": "Foreign"
+      }
+    ]
+  }
+}
