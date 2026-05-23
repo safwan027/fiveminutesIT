@@ -1,0 +1,82 @@
+name: Daily IT Brief
+
+on:
+  schedule:
+    # 12:01 AM IST = 6:31 PM UTC (previous day)
+    - cron: '31 18 * * *'
+  workflow_dispatch:  # Allow manual trigger from GitHub UI
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout pipeline repo
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history so git push works
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore context store
+        uses: actions/cache@v4
+        with:
+          path: data/context.json
+          key: context-store-${{ github.run_id }}
+          restore-keys: |
+            context-store-
+
+      - name: Run pipeline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          # For GitHub Actions, publish directly to this repo's output/site/
+          WEBSITE_REPO_PATH: ${{ github.workspace }}
+        run: |
+          mkdir -p data output/daily output/site logs
+          python3 pipeline/run.py 2>&1 | tee logs/pipeline.log
+
+      - name: Save context store
+        uses: actions/cache@v4
+        if: always()
+        with:
+          path: data/context.json
+          key: context-store-${{ github.run_id }}
+
+      - name: Commit and push site files
+        run: |
+          git config user.name "IT Brief Bot"
+          git config user.email "brief-bot@users.noreply.github.com"
+
+          git add output/site/index.html
+
+          # Only add para-a and changelog if they changed
+          if git diff --cached --quiet output/site/para-a.html 2>/dev/null; then
+            git diff --name-only HEAD | grep -q "para-a.html" && git add output/site/para-a.html || true
+          fi
+
+          if git diff --name-only HEAD | grep -q "changelog.html"; then
+            git add output/site/changelog.html
+          fi
+
+          # Commit only if there's something staged
+          git diff --cached --quiet || git commit -m "brief: $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Upload pipeline log
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pipeline-log-${{ github.run_id }}
+          path: logs/pipeline.log
+          retention-days: 30
