@@ -10,8 +10,8 @@ jobs:
   run-pipeline:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    permissions:
-      contents: write 
+  permissions:
+    contents: write 
 
     steps:
       - name: Checkout pipeline repo
@@ -46,7 +46,7 @@ jobs:
           WEBSITE_REPO_PATH: ${{ github.workspace }}
         run: |
           mkdir -p data output/daily output/site logs
-          python3 pipeline/run.py 2>&1 | tee logs/pipeline.log
+          python3 run.py 2>&1 | tee logs/pipeline.log
 
       - name: Save context store
         uses: actions/cache@v4
