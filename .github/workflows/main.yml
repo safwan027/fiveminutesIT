@@ -37,7 +37,7 @@ jobs:
 
       - name: Run pipeline
         env:
-          GEMINI_API_KEY: ${{ variables.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ variables.GEMINI_API_KEY }}
           ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           # For GitHub Actions, publish directly to this repo's output/site/
