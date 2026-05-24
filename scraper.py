@@ -157,7 +157,7 @@ def scrape_headlines(store: dict, today: str) -> list:
                 title = getattr(entry, "title", "").strip()
                 link = getattr(entry, "link", "").strip()
                 summary = getattr(entry, "summary", "").strip()
-                print("title",title);
+                # client.messages.create
                 if not title or not link:
                     continue
 

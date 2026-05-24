@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Change Log — India IT Brief</title>
+<title>Change Log — 5minIT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -37,49 +37,70 @@ body {
 .site-header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
 }
-.header-inner {
+.site-header.hidden {
+  transform: translateY(-100%);
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   max-width: 760px;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 0 0;
 }
-.site-title {
+.header-left {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.e-paper { color: #b20710; font-weight: bold; text-decoration: none; }
+.site-logo {
   font-family: var(--font-display);
-  font-size: 20px;
-  color: var(--text);
+  font-size: 40px;
+  color: #000;
   text-decoration: none;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  margin-left: 21px;
+
 }
-.site-tagline { font-size: 12px; color: var(--hint); margin-top: 2px; }
-.nav {
+.header-right {
   display: flex;
-  gap: 2px;
-  margin-top: 12px;
-}
-.tab {
-  font-family: var(--font-body);
+  gap: 16px;
+  align-items: center;
   font-size: 13px;
   font-weight: 500;
-  color: var(--muted);
+}
+.subscribe-btn {
+  background: #b20710;
+  color: #fff;
+  padding: 6px 16px;
   text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 6px 6px 0 0;
-  border: 1px solid transparent;
-  border-bottom: none;
-  transition: color 0.15s;
+  border-radius: 2px;
 }
-.tab:hover { color: var(--text); }
-.tab.active {
-  color: var(--text);
-  background: var(--bg);
-  border-color: var(--border);
-  border-bottom-color: var(--bg);
-  margin-bottom: -1px;
+.header-bottom {
+  display: flex;
+  justify-content: center;
+  /* padding: 12px 24px; */
+  /* border-top: 1px solid #e0e0e0; */
+  margin-right: 25px;
 }
+.nav {
+  display: flex;
+  gap: 32px;
+  margin-right: 24px;
+
+}
+.tab {
+  font-size: 15px;
+  color: #000;
+  text-decoration: none;
+}
+.tab.active { font-weight: bold; color: black; }
 .main {
   max-width: 760px;
   margin: 0 auto;
@@ -198,37 +219,28 @@ footer { border-top: 1px solid var(--border); padding: 24px; text-align: center;
 </head>
 <body>
 <header class="site-header">
-  <div class="header-inner">
-    <div>
-      <a href="index.html" class="site-title">India IT Brief</a>
-      <div class="site-tagline">Daily job market signals for Indian IT professionals</div>
-    </div>
+  <div class="header-top">
+    <a href="index.html" class="site-logo">5minIT</a> 
+  <div class="nav"><a href="index.html" class="tab">Headlines</a>
+<a href="para-a.html" class="tab">Outlook</a>
+<a href="changelog.html" class="tab active">Dynamics</a>
   </div>
-  <div class="nav"><a href="index.html" class="tab">Today's Brief</a>
-<a href="para-a.html" class="tab">Market Context</a>
-<a href="changelog.html" class="tab active">Change Log</a></div>
+  </div>
+    
+   
 </header>
+
+
 <main class="main">
 
-<h1>Change Log</h1>
-<p class="page-meta">Every change to the Market Context (Para A) — git-diff style · Most recent first</p>
+<h1>Market Dynamics</h1>
+<p class="page-meta">Every change notified to the market outlook</p>
 <div class="section-label">All changes</div>
-
-<div class="cl-entry">
-  <div class="cl-header">
-    <span class="cl-date">2026-05-23</span>
-    <span class="cl-title">No change — sentiment within normal range</span>
-    <span class="badge badge-gray">No change</span>
-    <span class="chevron">&#8964;</span>
-  </div>
-  <div class="cl-body">
-    <div class="cl-empty">Today's sentiment score (+0.00) was within the normal band. Rolling average: +0.00, effective threshold: 0.15.</div>
-  </div>
-</div>
+<p style="color:var(--hint);font-size:14px">No changes recorded yet.</p>
 
 </main>
 <footer>
-  Built with Claude API · Data from public RSS feeds · Updated daily at 12:01 AM IST
+ <p class="page-meta">Information is curated and analysed with AI.</p>
 </footer>
 <script>
 document.querySelectorAll('.card-header').forEach(h => {
@@ -246,6 +258,22 @@ document.querySelectorAll('.cl-header').forEach(h => {
     const open = body.classList.toggle('open');
     if (chev) chev.classList.toggle('open', open);
   });
+});
+
+let lastScroll = 0;
+const header = document.querySelector('.site-header');
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  if (currentScroll <= 0) {
+    header.classList.remove('hidden');
+    return;
+  }
+  if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
+    header.classList.add('hidden');
+  } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
+    header.classList.remove('hidden');
+  }
+  lastScroll = currentScroll;
 });
 </script>
 </body>

@@ -4,7 +4,7 @@ Produces: index.html (daily), para-a.html, changelog.html
 """
 
 import json
-from datetime import date
+from datetime import date,datetime
 from pathlib import Path
 
 
@@ -12,9 +12,9 @@ from pathlib import Path
 
 def _shell(title: str, active_tab: str, body: str) -> str:
     tabs = [
-        ("index.html", "daily", "Today's Brief"),
-        ("para-a.html", "para-a", "Market Context"),
-        ("changelog.html", "changelog", "Change Log"),
+        ("index.html", "daily", "Headlines"),
+        ("para-a.html", "para-a", "Outlook"),
+        ("changelog.html", "changelog", "Dynamics"),
     ]
     nav = "\n".join(
         f'<a href="{href}" class="tab{" active" if key == active_tab else ""}">'
@@ -26,7 +26,7 @@ def _shell(title: str, active_tab: str, body: str) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title} — India IT Brief</title>
+<title>5minIT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -60,13 +60,20 @@ body {{
 .site-header {{
   background: var(--surface);
   border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}}
+.site-header.hidden {{
+  transform: translateY(-100%);
 }}
 .header-top {{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid #e0e0e0;
+  max-width: 760px;
+  margin: 0 auto;
 }}
 .header-left {{
   display: flex;
@@ -81,6 +88,8 @@ body {{
   color: #000;
   text-decoration: none;
   letter-spacing: -0.01em;
+  margin-left: 21px;
+
 }}
 .header-right {{
   display: flex;
@@ -99,19 +108,23 @@ body {{
 .header-bottom {{
   display: flex;
   justify-content: center;
-  padding: 12px 24px;
+  /* padding: 12px 24px; */
+  /* border-top: 1px solid #e0e0e0; */
+  margin-right: 25px;
 }}
 .nav {{
   display: flex;
   gap: 32px;
+  margin-right: 24px;
+
 }}
 .tab {{
-  font-family: var(--font-display);
-  font-size: 18px;
-  color: #000;
+  font-size: 15px;
+  color: maroon;
   text-decoration: none;
+  font-weight: bold;
 }}
-.tab.active {{ font-weight: bold; border-bottom: 2px solid #000; }}
+.tab.active {{ font-weight: bold; color: maroon; }}
 .main {{
   max-width: 760px;
   margin: 0 auto;
@@ -231,26 +244,20 @@ footer {{ border-top: 1px solid var(--border); padding: 24px; text-align: center
 <body>
 <header class="site-header">
   <div class="header-top">
-    <div class="header-left">
-      <span style="color: var(--text);">May 23, 2026</span>
-      <a href="#" class="e-paper">e-Paper</a>
-    </div>
-    <a href="index.html" class="site-logo">INDIA IT BRIEF</a>
-    <div class="header-right">
-      <a href="#" style="color:var(--text);text-decoration:none">eBooks</a>
-      <a href="#" style="color:var(--text);text-decoration:none">LOGIN</a>
-      <a href="#" class="subscribe-btn">SUBSCRIBE</a>
-    </div>
+    <a href="index.html" class="site-logo">5minIT</a> 
+  <div class="nav">{nav}
   </div>
-  <div class="header-bottom">
-    <div class="nav">{nav}</div>
   </div>
+    
+   
 </header>
+
+
 <main class="main">
 {body}
 </main>
 <footer>
- 
+ <p class="page-meta">Information is curated and analysed with AI.</p>
 </footer>
 <script>
 document.querySelectorAll('.card-header').forEach(h => {{
@@ -268,6 +275,22 @@ document.querySelectorAll('.cl-header').forEach(h => {{
     const open = body.classList.toggle('open');
     if (chev) chev.classList.toggle('open', open);
   }});
+}});
+
+let lastScroll = 0;
+const header = document.querySelector('.site-header');
+window.addEventListener('scroll', () => {{
+  const currentScroll = window.pageYOffset;
+  if (currentScroll <= 0) {{
+    header.classList.remove('hidden');
+    return;
+  }}
+  if (currentScroll > lastScroll && !header.classList.contains('hidden')) {{
+    header.classList.add('hidden');
+  }} else if (currentScroll < lastScroll && header.classList.contains('hidden')) {{
+    header.classList.remove('hidden');
+  }}
+  lastScroll = currentScroll;
 }});
 </script>
 </body>
@@ -328,11 +351,6 @@ def render_daily(brief: dict, store: dict, today: str) -> str:
     <div class="metric-value neutral">{len(brief['headlines'])}</div>
     <div class="metric-sub">After filter</div>
   </div>
-  <div class="metric">
-    <div class="metric-label">Para A version</div>
-    <div class="metric-value neutral">v{store['para_a']['version']}</div>
-    <div class="metric-sub">Updated {store['para_a']['last_updated'] or 'not yet'}</div>
-  </div>
 </div>"""
 
     gauge = f"""
@@ -353,12 +371,11 @@ def render_daily(brief: dict, store: dict, today: str) -> str:
   <div class="card-header">
     <span class="card-num">{i:02d}</span>
     <div class="card-content">
-      <div class="card-title">{h.get('text', '')}</div>
-      <div class="card-meta">
+        <span class="card-title">{h.get('text', 'Default Title')}</span>
         {_geo_badge(h.get('geo', 'India'))}
         {_impact_badge(h.get('impact', 'neu'), h.get('impact_label', 'Neutral'))}
         {_badge(h.get('badge', ''))}
-      </div>
+      
     </div>
     <span class="chevron">&#8964;</span>
   </div>
@@ -381,8 +398,7 @@ def render_daily(brief: dict, store: dict, today: str) -> str:
 </div>"""
 
     body = f"""
-<h1>India IT Job Market Brief</h1>
-<p class="page-meta">Daily update · {today} · For freshers and IT professionals</p>
+<p class="page-meta">Recently updated on {datetime.strptime(today, "%Y-%m-%d").strftime("%d %B, %Y")} </p>
 {metrics}
 {gauge}
 <div class="section-label">Headlines — tap to expand</div>
@@ -423,8 +439,8 @@ def render_para_a(store: dict) -> str:
 </div>"""
 
     body = f"""
-<h1>Market Context</h1>
-<p class="page-meta">Para A · v{para_a['version']} · Last updated: {para_a.get('last_updated', 'initial')} · Updated only when market shifts</p>
+<h1>Market Outlook</h1>
+<p class="page-meta">Last updated: {para_a.get('last_updated', 'initial')} · Updated only when market shifts</p>
 
 <div class="section-label">Broader view — Indian IT job market</div>
 {sections_html}
@@ -503,8 +519,8 @@ def render_changelog(store: dict) -> str:
 </div>"""
 
     body = f"""
-<h1>Change Log</h1>
-<p class="page-meta">Every change to the Market Context (Para A) — git-diff style · Most recent first</p>
+<h1>Market Dynamics</h1>
+<p class="page-meta">Every change notified to the market outlook</p>
 <div class="section-label">All changes</div>
 {entries_html}
 """

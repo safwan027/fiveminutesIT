@@ -112,12 +112,18 @@ Rules:
 
     for attempt in range(1, 4):
         try:
-            response = client.messages.create(
+            # response = client.messages.create(
+            #     model="gemini-2.5-flash",
+            #     max_tokens=600,
+            #     messages=[{"role": "user", "content": prompt}],
+            # )
+            # raw = response.content[0].text
+
+            response = client.chat.completions.create(
                 model="gemini-2.5-flash",
-                max_tokens=600,
                 messages=[{"role": "user", "content": prompt}],
             )
-            raw = response.content[0].text
+            raw = response.choices[0].message.content
             clean = re.sub(r"```json\s*|```\s*", "", raw).strip()
             diff = json.loads(clean)
 

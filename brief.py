@@ -19,6 +19,7 @@ OUTPUT_SCHEMA = """
   "headlines": [
     {
       "id": "string (the hash from input)",
+      "link": string (url to source article)
       "text": "string (original headline title)",
       "geo": "India | Foreign (India-impacted) | Foreign (global signal)",
       "impact": "pos | neg | neu",
