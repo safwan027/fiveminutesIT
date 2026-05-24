@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily Brief — 2026-05-23 — India IT Brief</title>
+<title>Daily Brief — 2026-05-24 — India IT Brief</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -37,49 +37,58 @@ body {
 .site-header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 0 24px;
 }
-.header-inner {
-  max-width: 760px;
-  margin: 0 auto;
+.header-top {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 16px 0 0;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
 }
-.site-title {
-  font-family: var(--font-display);
-  font-size: 20px;
-  color: var(--text);
-  text-decoration: none;
-  letter-spacing: -0.02em;
-}
-.site-tagline { font-size: 12px; color: var(--hint); margin-top: 2px; }
-.nav {
+.header-left {
   display: flex;
-  gap: 2px;
-  margin-top: 12px;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 500;
 }
-.tab {
-  font-family: var(--font-body);
+.e-paper { color: #b20710; font-weight: bold; text-decoration: none; }
+.site-logo {
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: #000;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.header-right {
+  display: flex;
+  gap: 16px;
+  align-items: center;
   font-size: 13px;
   font-weight: 500;
-  color: var(--muted);
+}
+.subscribe-btn {
+  background: #b20710;
+  color: #fff;
+  padding: 6px 16px;
   text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 6px 6px 0 0;
-  border: 1px solid transparent;
-  border-bottom: none;
-  transition: color 0.15s;
+  border-radius: 2px;
 }
-.tab:hover { color: var(--text); }
-.tab.active {
-  color: var(--text);
-  background: var(--bg);
-  border-color: var(--border);
-  border-bottom-color: var(--bg);
-  margin-bottom: -1px;
+.header-bottom {
+  display: flex;
+  justify-content: center;
+  padding: 12px 24px;
 }
+.nav {
+  display: flex;
+  gap: 32px;
+}
+.tab {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+}
+.tab.active { font-weight: bold; border-bottom: 2px solid #000; }
 .main {
   max-width: 760px;
   margin: 0 auto;
@@ -198,20 +207,28 @@ footer { border-top: 1px solid var(--border); padding: 24px; text-align: center;
 </head>
 <body>
 <header class="site-header">
-  <div class="header-inner">
-    <div>
-      <a href="index.html" class="site-title">India IT Brief</a>
-      <div class="site-tagline">Daily job market signals for Indian IT professionals</div>
+  <div class="header-top">
+    <div class="header-left">
+      <span style="color: var(--text);">May 23, 2026</span>
+      <a href="#" class="e-paper">e-Paper</a>
+    </div>
+    <a href="index.html" class="site-logo">INDIA IT BRIEF</a>
+    <div class="header-right">
+      <a href="#" style="color:var(--text);text-decoration:none">eBooks</a>
+      <a href="#" style="color:var(--text);text-decoration:none">LOGIN</a>
+      <a href="#" class="subscribe-btn">SUBSCRIBE</a>
     </div>
   </div>
-  <div class="nav"><a href="index.html" class="tab active">Today's Brief</a>
+  <div class="header-bottom">
+    <div class="nav"><a href="index.html" class="tab active">Today's Brief</a>
 <a href="para-a.html" class="tab">Market Context</a>
 <a href="changelog.html" class="tab">Change Log</a></div>
+  </div>
 </header>
 <main class="main">
 
 <h1>India IT Job Market Brief</h1>
-<p class="page-meta">Daily update · 2026-05-23 · For freshers and IT professionals</p>
+<p class="page-meta">Daily update · 2026-05-24 · For freshers and IT professionals</p>
 
 <div class="metrics-grid">
   <div class="metric">
@@ -226,7 +243,7 @@ footer { border-top: 1px solid var(--border); padding: 24px; text-align: center;
   </div>
   <div class="metric">
     <div class="metric-label">Headlines analysed</div>
-    <div class="metric-value neutral">0</div>
+    <div class="metric-value neutral">5</div>
     <div class="metric-sub">After filter</div>
   </div>
   <div class="metric">
@@ -246,24 +263,99 @@ footer { border-top: 1px solid var(--border); padding: 24px; text-align: center;
 </div>
 <div class="section-label">Headlines — tap to expand</div>
 
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">01</span>
+    <div class="card-content">
+      <div class="card-title">Major IT firm announces 5% workforce reduction globally, impacting India operations</div>
+      <div class="card-meta">
+        <span class="badge badge-purple">🌐 Foreign (India-impacted)</span>
+        <span class="badge badge-red">Negative</span>
+        <span class="badge badge-blue">Layoffs</span>
+      </div>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="card-body">This news means more competition for existing roles, especially if you're recently laid off from a similar firm. Focus on upskilling and networking, and be prepared for a longer job search as more experienced candidates enter the market.</div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">02</span>
+    <div class="card-content">
+      <div class="card-title">Tier-2 IT companies ramp up fresher hiring, focus on niche skills</div>
+      <div class="card-meta">
+        <span class="badge badge-amber">🇮🇳 India</span>
+        <span class="badge badge-green">Positive</span>
+        <span class="badge badge-blue">Fresher hiring</span>
+      </div>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="card-body">This is good news for freshers! Don't just target the big names; expand your search to Tier-2 companies. Focus on developing niche skills like cloud computing, data science, or specific programming languages to stand out, as these are what they're looking for.</div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">03</span>
+    <div class="card-content">
+      <div class="card-title">AI and Cybersecurity skills in high demand, report suggests</div>
+      <div class="card-meta">
+        <span class="badge badge-amber">🇮🇳 India</span>
+        <span class="badge badge-gray">Neutral</span>
+        <span class="badge badge-blue">Skills signal</span>
+      </div>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="card-body">While not directly creating jobs today, this is a strong signal for future-proofing your career. If you're a fresher or looking to reskill, consider courses or certifications in AI, Machine Learning, or Cybersecurity. This will significantly boost your long-term employability.</div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">04</span>
+    <div class="card-content">
+      <div class="card-title">Some tech startups defer joining dates for new recruits amidst funding crunch</div>
+      <div class="card-meta">
+        <span class="badge badge-amber">🇮🇳 India</span>
+        <span class="badge badge-red">Negative</span>
+        <span class="badge badge-blue">Deferred joins</span>
+      </div>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="card-body">If you have an offer from a startup, be prepared for potential delays. Keep actively applying to other companies, even if you have an offer in hand, as a backup. Use any extra time to upskill or work on personal projects to strengthen your profile.</div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">05</span>
+    <div class="card-content">
+      <div class="card-title">Global Capability Centers in India continue expansion, creating new roles</div>
+      <div class="card-meta">
+        <span class="badge badge-amber">🇮🇳 India</span>
+        <span class="badge badge-green">Positive</span>
+        <span class="badge badge-blue">GCC signal</span>
+      </div>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="card-body">This is a strong positive signal, especially for experienced professionals and those with specialized skills. GCCs offer stable roles and good growth. Actively target these centers in your job search, as they are a consistent source of new opportunities in India.</div>
+</div>
 <div class="section-label">Summary — how today affects your job search</div>
 
 <div class="summary-block pos">
   <h3>Headlines lifting sentiment</h3>
-  <p>No specific positive headlines were reported today, suggesting a stable but not overtly bullish market for job seekers. Continue to focus on skill enhancement and targeted applications.</p>
+  <p>Tier-2 IT companies are stepping up fresher hiring, particularly for those with niche skills, offering new avenues for entry-level candidates. Additionally, Global Capability Centers (GCCs) in India continue their robust expansion, consistently generating new roles across various experience levels.</p>
 </div>
 <div class="summary-block neg">
   <h3>Headlines dragging sentiment</h3>
-  <p>No specific negative headlines were reported today, indicating a temporary reprieve from major market downturns or widespread layoffs. This offers a moment to refine your job search strategy without immediate new pressures.</p>
+  <p>The global workforce reduction by a major IT firm, impacting India, means increased competition for available positions. Furthermore, some tech startups are deferring joining dates for new recruits due to funding challenges, creating uncertainty for those with existing offers.</p>
 </div>
 <div class="summary-block neu">
   <h3>Structurally important — not sentiment-moving</h3>
-  <p>Without specific headlines, the market appears to be in a holding pattern. Job seekers should continue to focus on skill development, networking, and tailoring resumes, as the underlying trends for hiring remain consistent.</p>
+  <p>A new report highlights the sustained high demand for AI and Cybersecurity skills, indicating clear areas for career development and future-proofing. While not immediate job creators, these trends signal crucial long-term skill investments.</p>
 </div>
 
 </main>
 <footer>
-  Built with Claude API · Data from public RSS feeds · Updated daily at 12:01 AM IST
+ 
 </footer>
 <script>
 document.querySelectorAll('.card-header').forEach(h => {
