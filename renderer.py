@@ -12,9 +12,9 @@ from pathlib import Path
 
 def _shell(title: str, active_tab: str, body: str) -> str:
     tabs = [
-        ("index.html", "daily", "Headlines"),
-        ("para-a.html", "para-a", "Outlook"),
-        ("changelog.html", "changelog", "Dynamics"),
+        ("/", "daily", "Headlines"),
+        ("/para-a", "para-a", "Outlook"),
+        ("/changelog", "changelog", "Dynamics"),
     ]
     nav = "\n".join(
         f'<a href="{href}" class="tab{" active" if key == active_tab else ""}">'
@@ -530,7 +530,8 @@ def render_changelog(store: dict) -> str:
 # ── Main render entry point ────────────────────────────────────────────────────
 
 def render_all(store: dict, brief: dict, today: str, output_path: Path):
-    site_path = output_path / "site"
+    # Write directly to the root directory so Vercel can serve them
+    site_path = output_path.parent
     site_path.mkdir(parents=True, exist_ok=True)
 
     # Daily — always written
