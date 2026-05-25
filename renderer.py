@@ -12,7 +12,7 @@ from pathlib import Path
 
 def _shell(title: str, active_tab: str, body: str) -> str:
     tabs = [
-        ("index.html", "daily", "Headlines"),
+        ("./index.html", "daily", "Headlines"),
         ("./para-a.html", "para-a", "Outlook"),
         ("./changelog.html", "changelog", "Dynamics"),
     ]
