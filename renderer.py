@@ -551,3 +551,4 @@ def render_all(store: dict, brief: dict, today: str, output_path: Path):
         render_changelog(store), encoding="utf-8"
     )
     print(f"  Rendered: changelog.html")
+  
