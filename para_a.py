@@ -18,7 +18,7 @@ except ImportError:
 def update_para_a(
     store: dict, brief: dict, headlines: list, shift_result: dict
 ) -> dict:
-    client = OpenAI(api_key="AIzaSyBn7JpiuXa6QdjvRAXywU389-D-IrQMCR0", base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+    client = OpenAI(api_key=os.getenv("GEMINI_API_KEY"), base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
     today = date.today().isoformat()
 
     # Serialize current Para A for the prompt

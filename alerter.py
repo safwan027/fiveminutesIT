@@ -15,19 +15,19 @@ import resend
 
 def send_alert(subject: str, body: str):
     """Send an alert email. Tries Resend first, falls back to SMTP."""
-    to_email = os.environ.get("ALERT_EMAIL")
+    to_email = os.getenv("ALERT_EMAIL") 
     if not to_email:
         print(f"  [Alert skipped — ALERT_EMAIL not set]: {subject}")
         return
 
-    resend_key = os.environ.get("RESEND_API_KEY")
+    resend_key = os.getenv("RESEND_API_KEY")
     if resend_key:
         _send_via_resend(resend_key, to_email, subject, body)
     else:
         _send_via_smtp(to_email, subject, body)
 
 
-    resend.api_key = os.environ.get("RESEND_API_KEY")
+    resend.api_key = os.getenv("RESEND_API_KEY")
 
 
 def _send_via_resend(api_key: str, to_email: str, subject: str, body: str):

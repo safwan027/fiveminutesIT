@@ -61,7 +61,7 @@ def append_changelog(
 def _generate_diff_entry(
     store: dict, old_para_a: dict, shift_result: dict, today: str
 ) -> dict:
-    client = OpenAI(api_key="AIzaSyBn7JpiuXa6QdjvRAXywU389-D-IrQMCR0", base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+    client = OpenAI(api_key=os.getenv("GEMINI_API_KEY"), base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
 
     old_sections = {s["id"]: s for s in old_para_a["sections"]}
     new_sections = {s["id"]: s for s in store["para_a"]["sections"]}

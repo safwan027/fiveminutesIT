@@ -239,6 +239,26 @@ p {{ color: var(--muted); margin-bottom: 12px; line-height: 1.7; }}
 .metric-value.neutral {{ color: var(--purple-text); }}
 .metric-sub {{ font-size: 11px; color: var(--hint); margin-top: 4px; }}
 footer {{ border-top: 1px solid var(--border); padding: 24px; text-align: center; font-size: 12px; color: var(--hint); }}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {{
+  .header-top {{ flex-direction: column; padding: 16px 0 12px; gap: 12px; }}
+  .site-logo {{ margin-left: 0; font-size: 32px; }}
+  .nav {{ margin-right: 0; gap: 24px; justify-content: center; width: 100%; }}
+  .main {{ padding: 20px 16px 48px; }}
+  h1 {{ font-size: 24px; }}
+  h2 {{ font-size: 18px; }}
+  .metrics-grid {{ grid-template-columns: 1fr; gap: 12px; }}
+  .gauge-wrap {{ flex-wrap: wrap; gap: 8px; padding: 16px; }}
+  .gauge-label {{ flex: 1 1 100%; min-width: auto; margin-bottom: 4px; }}
+  .gauge-track {{ width: 100%; margin: 8px 0; flex: 1 1 100%; }}
+  .gauge-value {{ flex: 1 1 100%; text-align: left; min-width: auto; }}
+  .card-header {{ padding: 12px; gap: 10px; }}
+  .card-body {{ padding: 0 12px 14px 42px; }}
+  .diff-section {{ overflow-x: auto; }}
+  .cl-header {{ align-items: flex-start; }}
+  .cl-date {{ min-width: 75px; }}
+}}
 </style>
 </head>
 <body>
