@@ -132,7 +132,8 @@ def parse_response(raw: str) -> dict:
 def generate_brief(
     store: dict, headlines: list, today: str, max_retries: int = 3
 ) -> dict:
-    client = OpenAI(api_key=os.getenv("GEMINI_API_KEY"), base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+    api_key=os.getenv("GEMINI_API_KEY")
+    client = OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
     system = build_system_prompt()
     context = build_context_block(store)
     task = build_task_block(headlines, today)
