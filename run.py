@@ -7,7 +7,7 @@ Orchestrates: scrape → filter → brief → shift detect → Para A update →
 import json
 import sys
 import traceback
-from datetime import date, datetime
+from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 
 from scraper import scrape_headlines
@@ -30,7 +30,9 @@ OUTPUT_PATH = BASE/"5minIT" / "output"
 
 
 def run_pipeline():
-    today = date.today().isoformat()
+    # today = date.today().isoformat()
+    ist = timezone(timedelta(hours=5, minutes=30))
+    today = datetime.now(ist).date().isoformat()
     print(f"\n{'='*50}")
     print(f"IT Brief Pipeline — {today}")
     print(f"{'='*50}\n")
