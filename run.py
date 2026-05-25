@@ -21,11 +21,11 @@ from publisher import publish
 from alerter import send_alert
 
 BASE = Path(__file__).parent.parent
-STORE_PATH = BASE/ "5minIT" / "data" / "context.json"
-OUTPUT_PATH = BASE/"5minIT" / "output"
+# STORE_PATH = BASE/ "5minIT" / "data" / "context.json"
+# OUTPUT_PATH = BASE/"5minIT" / "output"
 
-# STORE_PATH = BASE/  "data" / "context.json"
-# OUTPUT_PATH = BASE/ "output"
+STORE_PATH = BASE/ "data" / "context.json"
+OUTPUT_PATH = BASE/ "output" 
 
 
 
@@ -128,12 +128,12 @@ def run_pipeline():
     daily_path = OUTPUT_PATH / "daily" / f"{today}.json"
     daily_path.parent.mkdir(parents=True, exist_ok=True)
     daily_path.write_text(json.dumps(brief, indent=2, ensure_ascii=False))
-    print(f"  Daily brief saved: {daily_path}")
+    print(f"Daily brief saved: {daily_path}")
 
     # ── 7. Render + publish ───────────────────────────────
     print("[7/7] Rendering HTML and publishing...")
     render_all(store, brief, today, OUTPUT_PATH)
-    publish(OUTPUT_PATH, para_a_changed)
+    # publish(OUTPUT_PATH, para_a_changed)
 
     print(f"\n✓ Pipeline complete — {datetime.now().strftime('%H:%M:%S')}\n")
 
