@@ -160,12 +160,12 @@ jobs:
               log_content = 'Log file not found.'
 
           # Keep email readable by wrapping text or truncating if it's massive
-          email_body = f'<p>Daily 5minIT Workflow Status: <b>${{ job.status }}</b></p><pre>{log_content[-50000:]}</pre>'
+          email_body = f'<p>Daily 5minIT Workflow</p><pre>{log_content[-50000:]}</pre>'
 
           params = {
               'from': 'Pipeline Bot <onboarding@resend.dev>', # Change to your verified domain if available
               'to': [os.environ['ALERT_EMAIL']],
-              'subject': f'Daily 5minIT Workflow Status - ${{ job.status }}',
+              'subject': f'Daily 5minIT Workflow',
               'html': email_body,
           }
 
