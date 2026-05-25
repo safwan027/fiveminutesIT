@@ -1,0 +1,44 @@
+name: Dummy Routing Test
+
+on:
+  push:
+    # Triggers on every push to any branch
+    branches:
+      - '**'
+
+jobs:
+  test-routing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create Dummy HTML files
+        # Creates dummy files without any API calls so you can test routing
+        run: |
+          mkdir -p output/site
+          
+          echo "<h1>Index - Routing Test</h1><p>Last updated: $(date)</p>" > output/site/index.html
+          echo "<h1>Para A - Routing Test</h1><p>Last updated: $(date)</p>" > output/site/para-a.html
+          echo "<h1>Changelog - Routing Test</h1><p>Last updated: $(date)</p>" > output/site/changelog.html
+          
+          # Also creating the 5minIT/output/site just in case Vercel is looking for it based on vercel.json
+          mkdir -p 5minIT/output/site
+          cp output/site/*.html 5minIT/output/site/
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "Routing Test Bot"
+          git config user.email "safwannasar0@gmail.com"
+
+          # Add both paths to see which one Vercel serves
+          git add output/site/*.html
+          git add 5minIT/output/site/*.html
+
+          git diff --cached --quiet || git commit -m "chore: dummy HTML files for routing test $(date -u +%s)"
+          git push
