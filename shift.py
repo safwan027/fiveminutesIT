@@ -38,15 +38,16 @@ def detect_shift(store: dict, today_score: float,
     # ── Check 3: 3-day confirmed streak ───────────────────
     # Catches slow drifts no single day would trigger
     streak_triggered = False
-    if len(history) >= 2:
-        last_two_labels = [e["label"] for e in history[-2:]]
-        all_three = last_two_labels + [today_label]
-        if (len(set(all_three)) == 1
-                and today_label in ("negative", "positive", "cautious")):
-            streak_triggered = True
+    # if len(history) >= 2:
+    #     last_two_labels = [e["label"] for e in history[-2:]]
+    #     all_three = last_two_labels + [today_label]
+    #     if (len(set(all_three)) == 1
+    #             and today_label in ("negative", "positive", "cautious")):
+    #         streak_triggered = True
 
     # ── OR gate ───────────────────────────────────────────
-    should_update = score_triggered or flag_triggered or streak_triggered
+    should_update = score_triggered or flag_triggered 
+    # or streak_triggered
 
     # ── Severity rating ───────────────────────────────────
     severity = "none"
