@@ -83,7 +83,7 @@ DEFAULT_STORE = {
     "changelog": [],
 
     "config": {
-        "shift_threshold": 0.25,
+        "shift_threshold": 0.30,
         "min_headlines": 5,
         "sentiment_window_days": 7,
         "sources": [
