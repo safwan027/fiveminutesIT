@@ -216,6 +216,26 @@ p { color: var(--muted); margin-bottom: 12px; line-height: 1.7; }
 .metric-value.neutral { color: var(--purple-text); }
 .metric-sub { font-size: 11px; color: var(--hint); margin-top: 4px; }
 footer { border-top: 1px solid var(--border); padding: 24px; text-align: center; font-size: 12px; color: var(--hint); }
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .header-top { flex-direction: column; padding: 16px 0 12px; gap: 12px; }
+  .site-logo { margin-left: 0; font-size: 32px; }
+  .nav { margin-right: 0; gap: 24px; justify-content: center; width: 100%; }
+  .main { padding: 20px 16px 48px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 18px; }
+  .metrics-grid { grid-template-columns: 1fr; gap: 12px; }
+  .gauge-wrap { flex-wrap: wrap; gap: 8px; padding: 16px; }
+  .gauge-label { flex: 1 1 100%; min-width: auto; margin-bottom: 4px; }
+  .gauge-track { width: 100%; margin: 8px 0; flex: 1 1 100%; }
+  .gauge-value { flex: 1 1 100%; text-align: left; min-width: auto; }
+  .card-header { padding: 12px; gap: 10px; }
+  .card-body { padding: 0 12px 14px 42px; }
+  .diff-section { overflow-x: auto; }
+  .cl-header { align-items: flex-start; }
+  .cl-date { min-width: 75px; }
+}
 </style>
 </head>
 <body>
@@ -234,22 +254,22 @@ footer { border-top: 1px solid var(--border); padding: 24px; text-align: center;
 
 <main class="main">
 
-<p class="page-meta">Recently updated on 25 May, 2026 </p>
+<p class="page-meta">Recently updated on 09 June, 2026 </p>
 
 <div class="metrics-grid">
   <div class="metric">
     <div class="metric-label">Today's sentiment</div>
-    <div class="metric-value down">-0.30</div>
-    <div class="metric-sub">Cautious</div>
+    <div class="metric-value neutral">+0.00</div>
+    <div class="metric-sub">Neutral</div>
   </div>
   <div class="metric">
     <div class="metric-label">7-day average</div>
-    <div class="metric-value neutral">-0.30</div>
+    <div class="metric-value neutral">-0.04</div>
     <div class="metric-sub">Rolling window</div>
   </div>
   <div class="metric">
     <div class="metric-label">Headlines analysed</div>
-    <div class="metric-value neutral">4</div>
+    <div class="metric-value neutral">0</div>
     <div class="metric-sub">After filter</div>
   </div>
 </div>
@@ -258,81 +278,25 @@ footer { border-top: 1px solid var(--border); padding: 24px; text-align: center;
   <span class="gauge-label">Market mood</span>
   <div class="gauge-track">
     <div class="gauge-fill"></div>
-    <div class="gauge-dot" style="left:35%"></div>
+    <div class="gauge-dot" style="left:50%"></div>
   </div>
-  <span class="gauge-value">Cautious</span>
+  <span class="gauge-value">Neutral</span>
 </div>
 <div class="section-label">Headlines — tap to expand</div>
 
-<div class="card">
-  <div class="card-header">
-    <span class="card-num">01</span>
-    <div class="card-content">
-        <span class="card-title">Global Tech Giant Announces Further Layoffs in Cloud Division</span>
-        <span class="badge badge-purple">🌐 Foreign (global signal)</span>
-        <span class="badge badge-red">Negative</span>
-        <span class="badge badge-blue">Layoffs</span>
-      
-    </div>
-    <span class="chevron">&#8964;</span>
-  </div>
-  <div class="card-body">This indicates that even large, stable companies are still optimizing costs, which could lead to reduced hiring or further layoffs impacting their Indian operations or vendor contracts. Focus on companies with strong financial health and diverse client portfolios, and be prepared for longer hiring cycles.</div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="card-num">02</span>
-    <div class="card-content">
-        <span class="card-title">GCCs in India Project Strong Hiring Growth for Q3 and Q4</span>
-        <span class="badge badge-amber">🇮🇳 India</span>
-        <span class="badge badge-green">Positive</span>
-        <span class="badge badge-blue">GCC signal</span>
-      
-    </div>
-    <span class="chevron">&#8964;</span>
-  </div>
-  <div class="card-body">This is good news for job seekers, especially freshers and those with specialized skills, as Global Capability Centers are actively expanding their teams in India. Target GCCs by researching their specific technology stacks and preparing for interviews that emphasize problem-solving and domain knowledge.</div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="card-num">03</span>
-    <div class="card-content">
-        <span class="card-title">Demand for AI/ML and Cybersecurity Skills Continues to Outpace Supply</span>
-        <span class="badge badge-amber">🇮🇳 India</span>
-        <span class="badge badge-gray">Neutral</span>
-        <span class="badge badge-blue">Skills signal</span>
-      
-    </div>
-    <span class="chevron">&#8964;</span>
-  </div>
-  <div class="card-body">While not directly about new jobs, this highlights critical skill gaps in the market. If you have these skills, your prospects are significantly better; if not, consider upskilling through certifications or projects to make yourself more competitive for future roles.</div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="card-num">04</span>
-    <div class="card-content">
-        <span class="card-title">Indian Startup Funding Remains Subdued, Impacting Early-Stage Hiring</span>
-        <span class="badge badge-amber">🇮🇳 India</span>
-        <span class="badge badge-red">Negative</span>
-        <span class="badge badge-blue">Startup hiring</span>
-      
-    </div>
-    <span class="chevron">&#8964;</span>
-  </div>
-  <div class="card-body">The tight funding environment means fewer new roles and more cautious hiring from startups, especially for freshers or those without niche skills. While some well-funded startups still hire, focus your efforts on established companies or those with recent funding rounds, and be prepared for more rigorous selection processes.</div>
-</div>
 <div class="section-label">Summary — how today affects your job search</div>
 
 <div class="summary-block pos">
   <h3>Headlines lifting sentiment</h3>
-  <p>Global Capability Centers (GCCs) in India are showing strong hiring intent for the upcoming quarters, indicating a stable and growing avenue for IT professionals, including freshers and those with specialized skills. This sector continues to be a reliable source of job opportunities amidst broader market uncertainties.</p>
+  <p>No specific positive headlines were reported today, indicating a stable but not overtly bullish market. Job seekers should continue focusing on skill development and targeted applications.</p>
 </div>
 <div class="summary-block neg">
   <h3>Headlines dragging sentiment</h3>
-  <p>Concerns persist as a global tech giant announced further layoffs, signaling ongoing cost optimization that could indirectly impact Indian IT services and hiring. Additionally, the subdued startup funding environment in India continues to limit early-stage hiring, making it tougher for freshers and those seeking roles in new ventures.</p>
+  <p>No specific negative headlines were reported today, suggesting a temporary pause in significant adverse news. This offers a brief respite, but the underlying cautious market sentiment remains.</p>
 </div>
 <div class="summary-block neu">
   <h3>Structurally important — not sentiment-moving</h3>
-  <p>The market continues to show a strong and unmet demand for specialized skills in areas like AI/ML and cybersecurity. This trend underscores the importance of continuous learning and upskilling to remain competitive and unlock new opportunities in the evolving tech landscape.</p>
+  <p>Today's brief reflects a quiet day in the job market, with no major news impacting hiring trends for Indian IT professionals. This period can be used for skill enhancement, networking, and refining your resume and interview strategies.</p>
 </div>
 
 </main>

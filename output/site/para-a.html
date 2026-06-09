@@ -216,6 +216,26 @@ p { color: var(--muted); margin-bottom: 12px; line-height: 1.7; }
 .metric-value.neutral { color: var(--purple-text); }
 .metric-sub { font-size: 11px; color: var(--hint); margin-top: 4px; }
 footer { border-top: 1px solid var(--border); padding: 24px; text-align: center; font-size: 12px; color: var(--hint); }
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .header-top { flex-direction: column; padding: 16px 0 12px; gap: 12px; }
+  .site-logo { margin-left: 0; font-size: 32px; }
+  .nav { margin-right: 0; gap: 24px; justify-content: center; width: 100%; }
+  .main { padding: 20px 16px 48px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 18px; }
+  .metrics-grid { grid-template-columns: 1fr; gap: 12px; }
+  .gauge-wrap { flex-wrap: wrap; gap: 8px; padding: 16px; }
+  .gauge-label { flex: 1 1 100%; min-width: auto; margin-bottom: 4px; }
+  .gauge-track { width: 100%; margin: 8px 0; flex: 1 1 100%; }
+  .gauge-value { flex: 1 1 100%; text-align: left; min-width: auto; }
+  .card-header { padding: 12px; gap: 10px; }
+  .card-body { padding: 0 12px 14px 42px; }
+  .diff-section { overflow-x: auto; }
+  .cl-header { align-items: flex-start; }
+  .cl-date { min-width: 75px; }
+}
 </style>
 </head>
 <body>
@@ -235,7 +255,7 @@ footer { border-top: 1px solid var(--border); padding: 24px; text-align: center;
 <main class="main">
 
 <h1>Market Outlook</h1>
-<p class="page-meta">Last updated: None · Updated only when market shifts</p>
+<p class="page-meta">Last updated: 2026-06-07 · Updated only when market shifts</p>
 
 <div class="section-label">Broader view — Indian IT job market</div>
 
@@ -244,27 +264,118 @@ footer { border-top: 1px solid var(--border); padding: 24px; text-align: center;
   <p>India's IT sector is not collapsing it is bifurcating. The traditional IT services model, which absorbed hundreds of thousands of freshers for routine coding and testing work, is contracting. Meanwhile, Global Capability Centres (GCCs) of multinationals are building deep engineering teams in Bengaluru, Hyderabad, and Pune paying 30% more than legacy IT firms.</p>
 </div>
 <div class="para-section">
-  <h3>Fresher pipeline </h3>
-  <p>Fresher hiring among tier-1 IT firms has fallen sharply from the FY22 peak of 6 lakh combined. Infosys remains the lone bright spot. Wipro and Tech Mahindra have deferred hundreds of joining letters. Campus hiring is recovering but concentrated at premier institutes and in AI/cloud roles.</p>
+  <h3>Fresher pipeline <span class="badge badge-gray" style="font-size:10px">Updated 2026-06-07</span></h3>
+  <p>Fresher hiring among tier-1 IT firms remains sharply below FY22 peaks, with many from the 2023 batch still facing deferred joining dates. This reflects a structural shift by IT majors towards calibrated, skill-based fresher intake rather than mass recruitment. Proactive skill development in in-demand areas and targeted job searches are more crucial than ever given these persistent market conditions.</p>
 </div>
 <div class="para-section">
-  <h3>Where opportunities actually are </h3>
-  <p>GCCs are set to add 3 to 4 lakh net new jobs in 2026. India's startup ecosystem Razorpay, Zepto, Meesho, Swiggy is actively hiring. The semiconductor mission targets 10 lakh jobs. Tier-2 city IT hubs (Kochi, Coimbatore, Indore) are growing with lower competition. Mid-career developers with 3 to 7 years experience are in a seller's market.</p>
+  <h3>Where opportunities actually are <span class="badge badge-gray" style="font-size:10px">Updated 2026-06-07</span></h3>
+  <p>GCCs remain a robust growth area, projected for 15% hiring growth in specialized roles, in addition to the 3-4 lakh net new jobs expected by 2026 for AI/ML and cloud skills. While Indian startups are securing funding, it's concentrated in late-stage rounds, leading to selective hiring for experienced professionals. Demand for mid-career developers (3-7 years experience) persists, though competition is heightened by global tech restructuring.</p>
 </div>
 <div class="para-section">
-  <h3>Skills that change your odds </h3>
-  <p>AI fluency using GitHub Copilot, integrating LLM APIs, understanding RAG pipelines is now explicitly required at Accenture, TCS, and Infosys JDs. Cloud, DevOps, and data engineering roles are growing 7% YoY while generic developer roles contract. Tailored keyword-optimised resumes are mandatory as ATS threshold has risen to 80%.</p>
+  <h3>Skills that change your odds <span class="badge badge-gray" style="font-size:10px">Updated 2026-05-29</span></h3>
+  <p>AI fluency, including GitHub Copilot, LLM API integration, and RAG pipelines, is explicitly required, with agentic platform adoption like OpenAI's Codex soaring 27x in India. This highlights a widening AI skills gap, underscoring the urgent need for upskilling to command premium salaries. Cloud, DevOps, and data engineering roles are growing 7% YoY while generic developer roles contract, making tailored, keyword-optimised resumes mandatory for an 80% ATS threshold.</p>
 </div>
 
 <div class="section-label">Sentiment history — last 14 days</div>
 <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px">
 
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-05-25</span>
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-06-09</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:50%;background:#d4a520;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">+0.00 neutral</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-06-08</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:47%;background:#d4a520;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">-0.05 cautious</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-06-07</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:50%;background:#d4a520;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">+0.00 neutral</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-06-06</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:50%;background:#d4a520;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">+0.00 cautious</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-06-05</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:56%;background:#3caa6c;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">+0.12 cautious</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-06-04</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:47%;background:#d4a520;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">-0.05 cautious</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-06-03</span>
   <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
     <div style="height:6px;width:35%;background:#e05050;border-radius:3px"></div>
   </div>
   <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">-0.30 cautious</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-06-02</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:35%;background:#e05050;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">-0.30 negative</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-06-01</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:50%;background:#d4a520;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">+0.00 neutral</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-05-31</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:40%;background:#e05050;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">-0.20 cautious</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-05-30</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:40%;background:#e05050;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">-0.20 cautious</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-05-29</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:47%;background:#d4a520;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">-0.05 cautious</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-05-28</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:50%;background:#d4a520;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">+0.00 neutral</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+  <span style="font-size:11px;color:var(--hint);font-family:var(--font-mono);min-width:85px">2026-05-27</span>
+  <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+    <div style="height:6px;width:62%;background:#3caa6c;border-radius:3px"></div>
+  </div>
+  <span style="font-size:11px;color:var(--muted);min-width:50px;text-align:right">+0.25 cautious</span>
 </div>
 </div>
 
