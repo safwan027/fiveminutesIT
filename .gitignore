@@ -1,5 +1,5 @@
 myvenv
-.env.example
+.env
 __pycache__/
 test_render.py  
 dummy-test.yml

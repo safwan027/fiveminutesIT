@@ -8,6 +8,7 @@ import os
 import re
 import time
 
+
 try:
     from openai import OpenAI
 except ImportError:
@@ -132,8 +133,11 @@ def parse_response(raw: str) -> dict:
 def generate_brief(
     store: dict, headlines: list, today: str, max_retries: int = 3
 ) -> dict:
-    #api_key=os.getenv("GEMINI_API_KEY")
-    client = OpenAI(api_key="AIzaSyBn7JpiuXa6QdjvRAXywU389-D-IrQMCR0", base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+
+    
+    key = os.getenv("GEMINI_API_KEY")
+
+    client = OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
     system = build_system_prompt()
     context = build_context_block(store)
     task = build_task_block(headlines, today)
