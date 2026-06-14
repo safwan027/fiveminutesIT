@@ -135,7 +135,7 @@ def generate_brief(
 ) -> dict:
 
     
-    key = os.getenv("GEMINI_API_KEY")
+    api_key = os.getenv("GEMINI_API_KEY")
 
     client = OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
     system = build_system_prompt()
