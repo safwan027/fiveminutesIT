@@ -8,6 +8,7 @@ import os
 import re
 import time
 from datetime import date
+from dotenv import load_dotenv
 
 try:
     from openai import OpenAI
@@ -61,7 +62,10 @@ def append_changelog(
 def _generate_diff_entry(
     store: dict, old_para_a: dict, shift_result: dict, today: str
 ) -> dict:
+
+    load_dotenv()
     api_key=os.getenv("GEMINI_API_KEY")
+    print("api_key",api_key)
     client = OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
 
     old_sections = {s["id"]: s for s in old_para_a["sections"]}

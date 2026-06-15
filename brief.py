@@ -7,6 +7,9 @@ import json
 import os
 import re
 import time
+from dotenv import load_dotenv
+
+
 
 
 try:
@@ -134,8 +137,9 @@ def generate_brief(
     store: dict, headlines: list, today: str, max_retries: int = 3
 ) -> dict:
 
-    
+    load_dotenv()
     api_key = os.getenv("GEMINI_API_KEY")
+    # print("api_key",api_key)
 
     client = OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
     system = build_system_prompt()
@@ -161,7 +165,7 @@ def generate_brief(
     ) 
 
             raw = response.choices[0].message.content
-            print("raw",raw)
+            # print("raw",raw)
             result = parse_response(raw)
             print(
                 f"  Parsed successfully — {len(result['headlines'])} headlines processed"

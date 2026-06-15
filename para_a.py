@@ -8,6 +8,7 @@ import os
 import re
 import time
 from datetime import date
+from dotenv import load_dotenv
 
 try:
     from openai import OpenAI
@@ -18,8 +19,9 @@ except ImportError:
 def update_para_a(
     store: dict, brief: dict, headlines: list, shift_result: dict
 ) -> dict:
+    load_dotenv()
     api_key=os.getenv("GEMINI_API_KEY")
-    client = OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+    client = OpenAI(api_key=oapi_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
     today = date.today().isoformat()
 
     # Serialize current Para A for the prompt
