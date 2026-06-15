@@ -57,7 +57,7 @@ def run_pipeline():
         store["last_run_date"] = today
         store["last_run_status"] = "failed"
         save_store(STORE_PATH, store)
-        send_alert("Pipeline FAILED — scrape step", msg)
+        # send_alert("Pipeline FAILED — scrape step", msg)
         sys.exit(1)
 
     if len(headlines) < store["config"]["min_headlines"]:
@@ -66,7 +66,7 @@ def run_pipeline():
         store["last_run_date"] = today
         store["last_run_status"] = "failed"
         save_store(STORE_PATH, store)
-        send_alert("Pipeline ABORTED — too few headlines", msg)
+        # send_alert("Pipeline ABORTED — too few headlines", msg)
         sys.exit(1)
 
     # ── 3. Generate brief via Claude ──────────────────────
@@ -81,7 +81,7 @@ def run_pipeline():
         store["last_run_date"] = today
         store["last_run_status"] = "partial"
         save_store(STORE_PATH, store)
-        send_alert("Pipeline FAILED — Claude brief step", msg)
+        # send_alert("Pipeline FAILED — Claude brief step", msg)
         sys.exit(1)
 
     # ── 4. Detect market shift ────────────────────────────
@@ -108,7 +108,7 @@ def run_pipeline():
         except Exception as e:
             msg = f"Para A update failed: {e}\n{traceback.format_exc()}"
             print(f"  ERROR: {msg}")
-            send_alert("Para A update failed (non-fatal)", msg)
+            # send_alert("Para A update failed (non-fatal)", msg)
             # Non-fatal — continue with old Para A
             append_changelog(store, store["para_a"], shift_result, today,
                              failed=True)
