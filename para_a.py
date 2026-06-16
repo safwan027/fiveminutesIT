@@ -21,7 +21,7 @@ def update_para_a(
 ) -> dict:
     load_dotenv()
     api_key=os.getenv("GEMINI_API_KEY")
-    client = OpenAI(api_key=oapi_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+    client = OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
     today = date.today().isoformat()
 
     # Serialize current Para A for the prompt
