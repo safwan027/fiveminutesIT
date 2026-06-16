@@ -1,5 +1,6 @@
 feedparser
 openai
 resend
+python-dotenv
 
 
