@@ -65,7 +65,7 @@ def _generate_diff_entry(
 
     load_dotenv()
     api_key=os.getenv("GEMINI_API_KEY")
-    print("api_key",api_key)
+    #print("api_key",api_key)
     client = OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
 
     old_sections = {s["id"]: s for s in old_para_a["sections"]}

@@ -100,6 +100,9 @@ Analyse these {len(headlines)} headlines and produce the JSON brief.
 
 {formatted}
 
+keep minimum 6 - 7 headlines, not everything has to be related to job prospects, keep the 
+market signal headlines as well, in brief also include the normal IT headlines too.
+
 For each headline:
 - Use the exact hash as the id field
 - Write the detail field for someone who is actively job hunting in India's IT sector right now
@@ -156,7 +159,7 @@ def generate_brief(
         model="gemini-2.5-flash", # Or gemini-2.5-pro
         messages=[
             {"role": "system", "content": system},
-            {"role": "user", "content": system}
+            {"role": "user", "content": user_message}
         ],
         # Explicitly pass basic json_object configuration
         # Do NOT pass full Pydantic schemas into response_format here
