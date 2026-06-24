@@ -340,7 +340,7 @@ def _severity_badge(sev: str) -> str:
 
     label = {"major": "Major shift", "moderate": "Moderate shift",
              "minor": "Minor shift", "none": "No change"}.get(sev, sev)
-             
+
     return f'<span class="badge {cls}">{label}</span>'
 
 
@@ -494,7 +494,7 @@ def render_changelog(store: dict) -> str:
                 lines_html = ""
                 for line in section.get("lines", []):
                     t = line.get("type", "context")
-                    sign = "+" if t == "added" else "−" if t == "removed" else " "
+                    sign = "+" if t == "added" else "−" if t == "removed" else "Reference for the changed section in the outlook"
                     text_cls = "removed" if t == "removed" else ""
 
                     lines_html += f"""
@@ -510,15 +510,15 @@ def render_changelog(store: dict) -> str:
 
             # Reason + source pills
             reason = entry.get("reason", "")
-            src_ids = entry.get("source_headline_ids", [])
-            pills = "".join(
-                f'<span class="pill">hl:{sid}</span>' for sid in src_ids
-            )
+            # src_ids = entry.get("source_headline_ids", [])
+            # pills = "".join(
+            #     f'<span class="pill">hl:{sid}</span>' for sid in src_ids
+            # )
             reason_block = f"""
 <div class="reason-block">
   <div class="reason-label">Why this changed</div>
   <div class="reason-text">{reason}</div>
-  {f'<div class="pills">{pills}</div>' if pills else ''}
+
 </div>""" if reason else ""
 
             no_change = sev == "none"

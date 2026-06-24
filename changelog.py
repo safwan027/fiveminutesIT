@@ -97,22 +97,20 @@ Return ONLY a valid JSON object:
   "sections": [
     {{
       "section_label": "short section name",
-      "lines": [
-        {{"type": "context", "text": "unchanged sentence shown for context"}},
+      "lines": [       
         {{"type": "removed", "text": "sentence that was removed or changed from"}},
         {{"type": "added", "text": "new sentence that replaced it"}}
       ]
     }}
   ],
-  "reason": "2-3 sentences: why did these specific sentences change, which headlines caused it",
-  "source_headline_ids": ["hash1", "hash2"]
+  "reason": "2-3 sentences: why did these specific sentences change, which headlines caused it"
 }}
 
 Rules:
 - Only include sections that actually changed
-- For each changed section, show 1-2 lines of context (unchanged nearby sentences) plus the removed/added pair
 - Keep line text concise — full sentences but not paragraphs
 - reason should be human-readable, not technical
+- dont make any change if its anything with sentence reordering or something related to grammars
 - No preamble, no markdown fences"""
 
     for attempt in range(1, 4):
