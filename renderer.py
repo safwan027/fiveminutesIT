@@ -337,8 +337,10 @@ def _geo_badge(geo: str) -> str:
 def _severity_badge(sev: str) -> str:
     cls = {"major": "badge-red", "moderate": "badge-amber",
            "minor": "badge-green", "none": "badge-gray"}.get(sev, "badge-gray")
+
     label = {"major": "Major shift", "moderate": "Moderate shift",
              "minor": "Minor shift", "none": "No change"}.get(sev, sev)
+             
     return f'<span class="badge {cls}">{label}</span>'
 
 
@@ -494,6 +496,7 @@ def render_changelog(store: dict) -> str:
                     t = line.get("type", "context")
                     sign = "+" if t == "added" else "−" if t == "removed" else " "
                     text_cls = "removed" if t == "removed" else ""
+
                     lines_html += f"""
 <div class="diff-line {t}">
   <span class="diff-sign">{sign}</span>

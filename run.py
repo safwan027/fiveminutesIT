@@ -124,7 +124,7 @@ def run_pipeline():
     store["last_run_date"] = today
     store["last_run_status"] = "success"
     store["last_run_headline_count"] = len(headlines)
-    save_store(STORE_PATH, store)
+    save_store(STORE_PATH, store)   
 
     # Save daily brief JSON
     daily_path = OUTPUT_PATH / "daily" / f"{today}.json"
