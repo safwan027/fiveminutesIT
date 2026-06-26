@@ -21,11 +21,11 @@ from publisher import publish
 from alerter import send_alert
 
 BASE = Path(__file__).parent.parent
-STORE_PATH = BASE/ "5minIT" / "data" / "context.json"
-OUTPUT_PATH = BASE/"5minIT" / "output"
+# STORE_PATH = BASE/ "5minIT" / "data" / "context.json"
+# OUTPUT_PATH = BASE/"5minIT" / "output"
 
-# STORE_PATH = BASE/ "data" / "context.json"
-# OUTPUT_PATH = BASE/ "output" 
+STORE_PATH = BASE/ "data" / "context.json"
+OUTPUT_PATH = BASE/ "output" 
 
 
 
@@ -34,7 +34,7 @@ def run_pipeline():
     ist = timezone(timedelta(hours=5, minutes=30))
     today = datetime.now(ist).date().isoformat()
     print(f"\n{'='*50}")
-    print(f"IT Brief Pipeline — {today}")
+    print(f"5minIT Pipeline — {today}")
     print(f"{'='*50}\n")
 
     # ── 1. Load context store ──────────────────────────────
@@ -127,10 +127,10 @@ def run_pipeline():
     save_store(STORE_PATH, store)   
 
     # Save daily brief JSON
-    daily_path = OUTPUT_PATH / "daily" / f"{today}.json"
-    daily_path.parent.mkdir(parents=True, exist_ok=True)
-    daily_path.write_text(json.dumps(brief, indent=2, ensure_ascii=False))
-    print(f"Daily brief saved: {daily_path}")
+    # daily_path = OUTPUT_PATH / "daily" / f"{today}.json"
+    # daily_path.parent.mkdir(parents=True, exist_ok=True)
+    # daily_path.write_text(json.dumps(brief, indent=2, ensure_ascii=False))
+    # print(f"Daily brief saved: {daily_path}")
 
     # ── 7. Render + publish ───────────────────────────────
     print("[7/7] Rendering HTML and publishing...")

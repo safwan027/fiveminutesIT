@@ -10,8 +10,6 @@ import time
 from dotenv import load_dotenv
 
 
-
-
 try:
     from openai import OpenAI
 except ImportError:
