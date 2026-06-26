@@ -21,11 +21,11 @@ from publisher import publish
 from alerter import send_alert
 
 BASE = Path(__file__).parent.parent
-# STORE_PATH = BASE/ "5minIT" / "data" / "context.json"
-# OUTPUT_PATH = BASE/"5minIT" / "output"
+STORE_PATH = BASE/ "5minIT" / "data" / "context.json"
+OUTPUT_PATH = BASE/"5minIT" / "output"
 
-STORE_PATH = BASE/ "data" / "context.json"
-OUTPUT_PATH = BASE/ "output" 
+# STORE_PATH = BASE/ "data" / "context.json"
+# OUTPUT_PATH = BASE/ "output" 
 
 
 
