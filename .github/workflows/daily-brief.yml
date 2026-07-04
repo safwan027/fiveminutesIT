@@ -17,7 +17,6 @@ jobs:
       - name: Checkout pipeline repo
         uses: actions/checkout@v4
         with:
-          # Fetch full history so git push works
           fetch-depth: 0
 
       - name: Set up Python
@@ -30,7 +29,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Restore context store
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: data/context.json
           key: context-store-${{ github.run_id }}
@@ -44,78 +43,15 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           WEBSITE_REPO_PATH: ${{ github.workspace }}
         run: |
-          mkdir -p data output/daily output/site logs
+          mkdir -p data logs
           python run.py 2>&1 | tee logs/pipeline.log
 
-      # --- NEW STEP: Email the log details ---
-      - name: Email pipeline log
-        if: always() # Ensures you get the log even if the pipeline fails
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
-        run: |
-          pip install resend
-          python -c "
-          import os
-          import resend
-
-          resend.api_key = os.getenv('RESEND_API_KEY')
-          
-          # Read log file content
-          log_path = 'logs/pipeline.log'
-          if os.path.exists(log_path):
-              with open(log_path, 'r') as f:
-                  log_content = f.read()
-          else:
-              log_content = 'Log file not found.'
-
-          # Keep email readable by wrapping text or truncating if it's massive
-          email_body = f'<p>Daily 5minIT Workflow</p><pre>{log_content[-50000:]}</pre>'
-
-          params = {
-              'from': 'Pipeline Bot <onboarding@resend.dev>', # Change to your verified domain if available
-              'to': [os.environ['ALERT_EMAIL']],
-              'subject': f'Daily 5minIT Workflow',
-              'html': email_body,
-          }
-
-          try:
-              resend.Emails.send(params)
-              print('Log email sent successfully!')
-          except Exception as e:
-              print(f'Failed to send email: {e}')
-          "
-      # ---------------------------------------
-
-      #matrimonial context store save
       - name: Save context store
-        uses: actions/cache@v4
+        uses: actions/cache/save@v4
         if: always()
         with:
           path: data/context.json
           key: context-store-${{ github.run_id }}
-
-      - name: Commit and push site files
-        run: |
-          git config user.name "IT Brief Bot"
-          git config user.email "safwannasar0@gmail.com"
-
-          git add output/site/index.html
-
-          if git diff --cached --quiet output/site/para-a.html 2>/dev/null; then
-            git diff --name-only HEAD | grep -q "para-a.html" && git add output/site/para-a.html || true
-          fi
-
-          if git diff --name-only HEAD | grep -q "changelog.html"; then
-            git add output/site/changelog.html
-          fi
-
-          git diff --cached --quiet || git commit -m "brief: $(date -u +%Y-%m-%d)"
-
-      - name: Push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git push
 
       - name: Upload pipeline log
         uses: actions/upload-artifact@v4
