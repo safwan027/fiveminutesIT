@@ -62,34 +62,45 @@ To run the pipeline manually, execute the main script:
 python run.py
 ```
 
-### Automation
+## Deployment (GitHub Actions)
 
-1. For daily automation, you can set up a cron job locally. For example, to run every day at 12:01 AM:
+Option: 1
+This service is designed to run completely hands-off via GitHub Actions.
+
+1. Push your repository to GitHub.
+2. In your repository, go to **Settings → Secrets and variables → Actions**.
+3. Add the following Repository Secrets:
+   - `GEMINI_API_KEY`
+   - `RESEND_API_KEY`
+   - `ALERT_EMAIL` (Optional: where failure alerts should be sent)
+
+Ensure your `.github/workflows/daily-brief.yml` file is configured to run the pipeline automatically via `cron` schedule.
+
+Option: 2
+For daily automation, you can set up a cron job locally. For example, to run every day at 12:01 AM:
 ```cron
 1 0 * * * cd /path/to/5minIT && /path/to/5minIT/myvenv/bin/python run.py
 ```
 
-2. This project includes a GitHub Actions workflow (`.github/workflows/daily-brief.yml`) that runs the pipeline automatically every day.
+## Tuning Parameters
 
-To set up the GitHub Actions workflow:
-1. Go to your GitHub repository **Settings** > **Secrets and variables** > **Actions**.
-2. Click **New repository secret** and add the following secrets:
-   - `GEMINI_API_KEY`: Your Gemini API key.
-   - `RESEND_API_KEY`: Your Resend API key.
-   - `ALERT_EMAIL`: The email address to receive pipeline logs and alerts.
-3. Make sure GitHub Actions has permission to push changes to the repository:
-   - Go to **Settings** > **Actions** > **General**.
-   - Under **Workflow permissions**, select **Read and write permissions** and click **Save**.
+All tunable parameters live in `5minIT files/data/context.json` under `config`—you can edit these values without touching code:
 
+| Field | Default | Effect |
+|-------|---------|--------|
+| `shift_threshold` | `0.25` | How much sentiment must deviate to trigger an Outlook update |
+| `min_headlines` | `5` | Abort if fewer headlines are found (scraper likely broken) |
+| `sentiment_window_days` | `7` | Rolling average window for shift detection |
 
-##Contributing
-We welcome contributions to make fiveminuteIT even better!
+*Note: If the Market Outlook updates too frequently, raise `shift_threshold` to `0.30`. If it never updates during volatile periods, lower it to `0.20`.*
 
-How to Contribute
-Fork the repository.
-Create your feature branch: git checkout -b feature/amazing-feature
-Commit your changes: git commit -m 'Add amazing feature'
-Push to the branch: git push origin feature/amazing-feature
-Open a Pull Request!
+## Contributing
 
-.
+We welcome contributions to make 5minIT even better!
+
+### How to Contribute
+1. Fork the repository.
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request!
