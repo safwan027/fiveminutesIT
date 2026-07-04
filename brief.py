@@ -59,10 +59,10 @@ def build_context_block(store: dict) -> str:
     def clean_text(text: str) -> str:
         return text.replace("ï¿½", "—").replace("ï¿½", "'")
 
-    # Serialize Para A sections with sanitized content
-    para_a_text = "\n\n".join(
+    # Serialize outlook sections with sanitized content
+    outlook_text = "\n\n".join(
         f"[Section: {s['id']}]\n{s['title']}\n{clean_text(s['content'])}"
-        for s in store["para_a"]["sections"]
+        for s in store["outlook"]["sections"]
     )
 
     # Last 7 sentiment entries
@@ -74,10 +74,10 @@ def build_context_block(store: dict) -> str:
     else:
         sentiment_lines = "  No history yet — first run."
 
-    return f"""## Current broader market context (Para A)
+    return f"""## Current broader market context (outlook)
 Use this as background lens. Do not summarise or rewrite it — just use it when judging each headline.
 
-{para_a_text}
+{outlook_text}
 
 ## Recent sentiment history (last 7 days)
 {sentiment_lines}

@@ -1,7 +1,7 @@
 """
-IT Job Market Brief — Daily Pipeline
+fiveminutesIT — Pipeline
 Runs at 12:01 AM IST via cron.
-Orchestrates: scrape → filter → brief → shift detect → Para A update → render → publish
+Orchestrates: scrape → filter → brief → shift detect → outlook update → email
 """
 
 import json
@@ -14,8 +14,8 @@ from scraper import scrape_headlines
 from store import load_store, save_store, append_sentiment, trim_store
 from brief import generate_brief
 from shift import detect_shift
-from para_a import update_para_a
-from changelog import append_changelog
+from outlook import update_outlook
+from dynamic import append_dynamic
 from email_renderer import render_email
 from newsletter import send_newsletter
 
@@ -86,33 +86,33 @@ def run_pipeline():
     print("[4/7] Running shift detector...")
     shift_result = detect_shift(store, brief["sentiment_score"],
                                 brief["sentiment_label"], brief["shift_detected"])
-    print(f"  Should update Para A: {shift_result['should_update']}")
+    print(f"  Should update outlook: {shift_result['should_update']}")
     if shift_result["should_update"]:
         print(f"  Severity: {shift_result['severity']}")
         print(f"  Triggered by: score={shift_result['score_triggered']} "
               f"flag={shift_result['flag_triggered']} "
               f"streak={shift_result['streak_triggered']}")
 
-    # ── 5. Update Para A if shift detected ────────────────
-    para_a_changed = False
+    # ── 5. Update outlook if shift detected ────────────────
+    outlook_changed = False
     if shift_result["should_update"]:
-        print("[5/7] Updating Para A...")
+        print("[5/7] Updating outlook...")
         try:
-            old_para_a = json.loads(json.dumps(store["para_a"]))  # deep copy
-            store = update_para_a(store, brief, headlines, shift_result)
-            changelog_entry = append_changelog(store, old_para_a, shift_result, today)
-            para_a_changed = True
-            print(f"  Para A updated to v{store['para_a']['version']}")
+            old_outlook = json.loads(json.dumps(store["outlook"]))  # deep copy
+            store = update_outlook(store, brief, headlines, shift_result)
+            dynamic_entry = append_dynamic(store, old_outlook, shift_result, today)
+            outlook_changed = True
+            print(f"  outlook updated to v{store['outlook']['version']}")
         except Exception as e:
-            msg = f"Para A update failed: {e}\n{traceback.format_exc()}"
+            msg = f"outlook update failed: {e}\n{traceback.format_exc()}"
             print(f"  ERROR: {msg}")
-            # send_alert("Para A update failed (non-fatal)", msg)
-            # Non-fatal — continue with old Para A
-            append_changelog(store, store["para_a"], shift_result, today,
+            # send_alert("outlook update failed (non-fatal)", msg)
+            # Non-fatal — continue with old outlook
+            append_dynamic(store, store["outlook"], shift_result, today,
                              failed=True)
     else:
         print("[5/7] No shift — appending no-update stub to changelog...")
-        append_changelog(store, store["para_a"], shift_result, today)
+        append_dynamic(store, store["outlook"], shift_result, today)
 
     # ── 6. Update store state ─────────────────────────────
     print("[6/7] Updating store...")

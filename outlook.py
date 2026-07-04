@@ -1,5 +1,5 @@
 """
-para_a.py — Patch Para A sections when a shift is detected
+outlook.py — Patch outlook sections when a shift is detected
 Only rewrites sections that are factually outdated — not the whole document
 """
 
@@ -16,7 +16,7 @@ except ImportError:
     raise ImportError("Run: pip install anthropic --break-system-packages")
 
 
-def update_para_a(
+def update_outlook(
     store: dict, brief: dict, headlines: list, shift_result: dict
 ) -> dict:
     load_dotenv()
@@ -25,10 +25,10 @@ def update_para_a(
     ist = timezone(timedelta(hours=5, minutes=30))
     today = datetime.now(ist).date().isoformat()
 
-    # Serialize current Para A for the prompt
+    # Serialize current outlook  for the prompt
     current_sections = "\n\n".join(
         f"[{s['id']}]\nTitle: {s['title']}\nContent: {s['content']}"
-        for s in store["para_a"]["sections"]
+        for s in store["outlook"]["sections"]
     )
 
     # Summary of today's shift signals
@@ -47,7 +47,7 @@ def update_para_a(
 
     prompt = f"""You are updating a standing market analysis document for Indian IT job seekers.
 
-## Current Para A sections:
+## Current outlook sections:
 {current_sections}
 
 ## Shift signals today:
@@ -77,7 +77,7 @@ No preamble, no explanation, no markdown fences."""
 
     for attempt in range(1, 4):
         try:
-            print(f"  Para A update call (attempt {attempt}/3)...")
+            print(f"  outlook update call (attempt {attempt}/3)...")
             # response = client.chat.completions.create(
             #     model="gemini-2.5-flash",
             #     messages=[{"role": "user", "content": prompt}],
@@ -113,7 +113,7 @@ No preamble, no explanation, no markdown fences."""
                 raise ValueError("Expected a JSON array")
 
             # Merge: preserve last_modified_date for unchanged sections
-            old_sections = {s["id"]: s for s in store["para_a"]["sections"]}
+            old_sections = {s["id"]: s for s in store["outlook"]["sections"]}
             new_sections = []
 
             for ns in new_sections_raw:
@@ -134,14 +134,14 @@ No preamble, no explanation, no markdown fences."""
             trigger_ids = [h["hash"] for h in headlines[:10]]
 
             # Update store
-            store["para_a"]["sections"] = new_sections
-            store["para_a"]["version"] = store["para_a"]["version"] + 1
-            store["para_a"]["last_updated"] = today
-            store["para_a"]["trigger_headline_ids"] = trigger_ids
-            store["para_a"]["shift_log"].append(
+            store["outlook"]["sections"] = new_sections
+            store["outlook"]["version"] = store["outlook"]["version"] + 1
+            store["outlook"]["last_updated"] = today
+            store["outlook"]["trigger_headline_ids"] = trigger_ids
+            store["outlook"]["shift_log"].append(
                 {
                     "date": today,
-                    "version_after": store["para_a"]["version"],
+                    "version_after": store["outlook"]["version"],
                     "severity": shift_result["severity"],
                     "trigger_score_delta": shift_result["deviation"],
                 }
@@ -150,9 +150,9 @@ No preamble, no explanation, no markdown fences."""
             return store
 
         except (json.JSONDecodeError, ValueError) as e:
-            print(f"  Para A parse error attempt {attempt}: {e}")
+            print(f"  outlook parse error attempt {attempt}: {e}")
             if attempt < 3:
                 time.sleep(2**attempt)
             continue
 
-    raise RuntimeError("Para A update failed after 3 attempts")
+    raise RuntimeError("outlook update failed after 3 attempts")

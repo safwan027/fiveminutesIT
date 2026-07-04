@@ -31,7 +31,7 @@ def detect_shift(store: dict, today_score: float,
         score_triggered = deviation > threshold
 
     # ── Check 2: Claude's semantic shift flag ─────────────
-    # Claude sees headlines + Para A together — catches
+    # Claude sees headlines + outlook together — catches
     # qualitative shifts that don't move the aggregate score
     flag_triggered = bool(claude_flag)
 

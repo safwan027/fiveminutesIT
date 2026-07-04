@@ -27,7 +27,7 @@
     "cautious": 9,
     "neutral": 2
   },
-  "para_a": {
+  "outlook": {
     "version": 1,
     "last_updated": "",
     "sections": [
@@ -66,7 +66,7 @@
       }
     ]
   },
-  "changelog": [],
+  "dynamic": [],
   "config": {
     "shift_threshold": 0.15,
     "min_headlines": 5,

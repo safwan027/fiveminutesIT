@@ -22,7 +22,6 @@ def _geo_badge(geo: str) -> str:
 
 def render_email(brief: dict, store: dict, today: str) -> str:
     score = brief["sentiment_score"]
-    sentiment_7d_avg = brief["sentiment_7d_avg"]
     pct = int((score + 1) / 2 * 100)
     
     # --- Headers ---
@@ -55,10 +54,10 @@ def render_email(brief: dict, store: dict, today: str) -> str:
         </div>
         """
 
-    # --- Market Outlook (Para A) inside details/summary ---
-    para_a = store.get("para_a", {})
+    # --- Market Outlook (outlook) inside details/summary ---
+    outlook = store.get("outlook", {})
     sections_html = ""
-    for s in para_a.get("sections", []):
+    for s in outlook.get("sections", []):
         sections_html += f"""
         <div style="margin-bottom:16px;">
             <h4 style="font-size:14px; font-weight:bold; color:#1a1916; margin-bottom:6px;">{s.get('title', '')}</h4>
@@ -66,8 +65,8 @@ def render_email(brief: dict, store: dict, today: str) -> str:
         </div>
         """
 
-    # --- Market Dynamics (Changelog) inside details/summary ---
-    entries = list(reversed(store.get("changelog", [])))[:5] # Show last 5 to not bloat email
+    # --- Market Dynamics (dynamic) inside details/summary ---
+    entries = list(reversed(store.get("dynamic", [])))[:5] # Show last 5 to not bloat email
     entries_html = ""
     if not entries:
         entries_html = "<p style='font-size:14px; color:#9e9c96;'>No changes recorded yet.</p>"
@@ -153,7 +152,7 @@ def render_email(brief: dict, store: dict, today: str) -> str:
                     <div style="text-align:center; width:50%;">
                         <div style="font-size:12px; color:#6b6860; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Sentiment Score</div>
                         <div style="font-size:24px; font-weight:bold; color:#4a4840;">
-                            {brief.get('sentiment_label', 'Neutral').title()}
+                            {score:+.2f}
                         </div>
                     </div>
                     <div style="text-align:center; width:50%;">

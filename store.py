@@ -23,7 +23,7 @@ DEFAULT_STORE = {
         "positive": 0, "negative": 0, "cautious": 0, "neutral": 0
     },
 
-    "para_a": {
+    "outlook": {
         "version": 1,
         "last_updated": None,
         "sections": [
@@ -80,7 +80,7 @@ DEFAULT_STORE = {
         "shift_log": []
     },
 
-    "changelog": [], 
+    "dynamic": [], 
 
     "config": {
         "shift_threshold": 0.35,

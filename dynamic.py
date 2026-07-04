@@ -1,6 +1,6 @@
 """
-changelog.py — Generate semantic diffs when Para A changes
-Stores structured diff entries for the website changelog tab
+dynamic.py — Generate semantic diffs when outlook changes
+Stores structured diff entries for the website dynamic tab
 """
 
 import json
@@ -16,15 +16,15 @@ except ImportError:
     raise ImportError("Run: pip install anthropic --break-system-packages")
 
 
-def append_changelog(
-    store: dict, old_para_a: dict, shift_result: dict, today: str, failed: bool = False
+def append_dynamic(
+    store: dict, old_outlook: dict, shift_result: dict, today: str, failed: bool = False
 ) -> dict:
     # No-shift stub — readers need to see "checked, nothing changed"
     if not shift_result["should_update"]:
-        store["changelog"].append(
+        store["dynamic"].append(
             {
                 "date": today,
-                "para_a_version": store["para_a"]["version"],
+                "outlook_version": store["outlook"]["version"],
                 "title": "No change — sentiment within normal range",
                 "severity": "none",
                 "sections": [],
@@ -40,27 +40,27 @@ def append_changelog(
         return store
 
     if failed:
-        store["changelog"].append(
+        store["dynamic"].append(
             {
                 "date": today,
-                "para_a_version": store["para_a"]["version"],
-                "title": "Shift detected — Para A update failed",
+                "outlook_version": store["outlook"]["version"],
+                "title": "Shift detected — outlook update failed",
                 "severity": shift_result["severity"],
                 "sections": [],
-                "reason": "A market shift was detected but the Para A update call failed. Will retry next run.",
+                "reason": "A market shift was detected but the outlook update call failed. Will retry next run.",
                 "source_headline_ids": [],
             }
         )
         return store
 
     # Generate semantic diff via Claude
-    entry = _generate_diff_entry(store, old_para_a, shift_result, today)
-    store["changelog"].append(entry)
+    entry = _generate_diff_entry(store, old_outlook, shift_result, today)
+    store["dynamic"].append(entry)
     return store
 
 
 def _generate_diff_entry(
-    store: dict, old_para_a: dict, shift_result: dict, today: str
+    store: dict, old_outlook: dict, shift_result: dict, today: str
 ) -> dict:
 
     load_dotenv()
@@ -68,8 +68,8 @@ def _generate_diff_entry(
     #print("api_key",api_key)
     client = OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
 
-    old_sections = {s["id"]: s for s in old_para_a["sections"]}
-    new_sections = {s["id"]: s for s in store["para_a"]["sections"]}
+    old_sections = {s["id"]: s for s in old_outlook["sections"]}
+    new_sections = {s["id"]: s for s in store["outlook"]["sections"]}
 
     old_text = "\n\n".join(
         f"[{sid}]\n{s['content']}" for sid, s in old_sections.items()
@@ -80,10 +80,10 @@ def _generate_diff_entry(
 
     prompt = f"""Compare these two versions of a market context document and produce a structured diff.
 
-## Old version (Para A v{old_para_a["version"]}):
+## Old version (outlook v{old_outlook["version"]}):
 {old_text}
 
-## New version (Para A v{store["para_a"]["version"]}):
+## New version (outlook v{store["outlook"]["version"]}):
 {new_text}
 
 ## Shift details:
@@ -132,8 +132,8 @@ Rules:
 
             return {
                 "date": today,
-                "para_a_version": store["para_a"]["version"],
-                "title": diff.get("title", "Para A updated"),
+                "outlook_version": store["outlook"]["version"],
+                "title": diff.get("title", "outlook updated"),
                 "severity": shift_result["severity"],
                 "sections": diff.get("sections", []),
                 "reason": diff.get("reason", ""),
@@ -141,7 +141,7 @@ Rules:
             }
 
         except (json.JSONDecodeError, ValueError) as e:
-            print(f"  Changelog diff error attempt {attempt}: {e}")
+            print(f"  dynamic diff error attempt {attempt}: {e}")
             if attempt < 3:
                 time.sleep(2**attempt)
             continue
@@ -149,10 +149,10 @@ Rules:
     # Fallback: minimal entry if diff generation fails
     return {
         "date": today,
-        "para_a_version": store["para_a"]["version"],
+        "outlook_version": store["outlook"]["version"],
         "title": f"Market shift — {shift_result['severity']} update",
         "severity": shift_result["severity"],
         "sections": [],
-        "reason": "Diff generation failed — Para A was updated but detailed diff unavailable.",
-        "source_headline_ids": store["para_a"]["trigger_headline_ids"],
+        "reason": "Diff generation failed — outlook was updated but detailed diff unavailable.",
+        "source_headline_ids": store["outlook"]["trigger_headline_ids"],
     }

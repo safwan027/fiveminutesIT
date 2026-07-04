@@ -1,0 +1,72 @@
+# fiveminuteIT - IT Job Market Brief Pipeline
+
+fiveminuteIT is an automated daily pipeline that curates IT job market news, analyzes sentiment, detects market shifts, and publishes a comprehensive daily brief via an email newsletter. It is designed to run automatically (e.g., via a daily cron job at 12:01 AM IST) and keeps professionals updated with a concise 5-minute read on the IT job market.
+
+## Architecture & Pipeline
+
+The pipeline is orchestrated by `run.py` and consists of several sequential stages:
+
+1. **Context Store Loading (`store.py`)**: Loads historical data, previous configurations, and state from `data/context.json`.
+2. **Scraping (`scraper.py`)**: Gathers and filters the latest IT job market headlines and news using RSS feeds.
+3. **Brief Generation (`brief.py`)**: Leverages LLMs to analyze headlines, compute a sentiment score, and generate a concise summary.
+4. **Shift Detection (`shift.py`)**: Analyzes the sentiment score against historical data to detect significant shifts in the market.
+5. **Dynamic Content Update (`outlook.py` & `dynamic.py`)**: If a market shift is detected, it dynamically updates the core contextual paragraph ("outlook") and records the change in a dynamic.
+6. **State Persistence**: Saves the updated context, sentiment history, and run status back to the JSON store.
+7. **Email Rendering & Newsletter Publishing (`email_renderer.py` & `newsletter.py`)**: Renders a polished HTML email and dispatches the newsletter to subscribers using the Resend API.
+
+## Requirements
+
+The project uses Python and relies on the following key libraries:
+- `feedparser` (for scraping RSS feeds)
+- `openai` (for LLM interactions)
+- `resend` (for sending email newsletters)
+- `python-dotenv` (for environment variable management)
+
+## Setup and Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd 5minIT
+   ```
+
+2. **Create a virtual environment (optional but recommended):**
+   ```bash
+   python -m venv myvenv
+   # On Windows:
+   myvenv\Scripts\activate
+   # On macOS/Linux:
+   source myvenv/bin/activate
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Environment Variables:**
+   Create a `.env` file in the root directory and add your required API keys (e.g., for OpenAI and Resend):
+   ```env
+   OPENAI_API_KEY=your_openai_api_key
+   RESEND_API_KEY=your_resend_api_key
+   ```
+
+5. **Data Initialization:**
+   Ensure `data/context.json` is properly initialized as required by the `store.py` module.
+
+## Usage
+
+To run the pipeline manually, execute the main script:
+
+```bash
+python run.py
+```
+
+### Automation
+
+For daily automation, set up a cron job. For example, to run every day at 12:01 AM:
+```cron
+1 0 * * * cd /path/to/5minIT && /path/to/5minIT/myvenv/bin/python run.py
+```
+
+.
