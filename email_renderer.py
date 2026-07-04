@@ -89,13 +89,13 @@ def render_email(brief: dict, store: dict, today: str) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>5minIT Daily Brief</title>
+<title>fiveminutesIT</title>
 <style>
     body {{
         margin: 0; padding: 0; background-color: #f7f5f0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }}
     .email-container {{
-        max-width: 600px; margin: 0 auto; background-color: #ffffff;
+        max-width: 800px; margin: 0 auto; background-color: #ffffff;
     }}
     .header {{
         background-color: #ffffff; padding: 20px 24px; border-bottom: 1px solid #e0e0e0; text-align: center;
@@ -134,8 +134,8 @@ def render_email(brief: dict, store: dict, today: str) -> str:
         <div class="email-container">
             <!-- Header -->
             <div class="header">
-                <h1 style="margin: 0; font-size: 28px; color: #000000; letter-spacing: -0.02em;">5minIT</h1>
-                <p style="margin: 8px 0 0; font-size: 14px; color: #6b6860;">Daily IT Job Market Brief — {datetime.strptime(today, "%Y-%m-%d").strftime("%d %b %Y")}</p>
+                <h1 style="margin: 0; font-size: 28px; color: #000000; letter-spacing: -0.02em;">fiveminutesIT</h1>
+                <p style="margin: 8px 0 0; font-size: 14px; color: #6b6860;">Latest Issue — {datetime.strptime(today, "%Y-%m-%d").strftime("%d %b %Y")}</p>
             </div>
             
             <!-- Main Content -->
@@ -143,7 +143,11 @@ def render_email(brief: dict, store: dict, today: str) -> str:
                 <!-- Metrics -->
                 <div style="display:flex; justify-content:space-between; margin-bottom: 24px; border:1px solid #e0e0e0; border-radius:8px; padding:16px;">
                     <div style="text-align:center; width:50%; border-right:1px solid #e0e0e0;">
+                    
                         <div style="font-size:12px; color:#6b6860; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Market Mood</div>
+                        <div style="font-size:24px; font-weight:bold; color:{_impact_color('pos' if score > 0.1 else 'neg' if score < -0.1 else 'neu')};">
+                            {brief.get('sentiment_label', 'Neutral').title()}
+                        </div>
                         <div style="font-size:24px; font-weight:bold; color:{_impact_color('pos' if score > 0.1 else 'neg' if score < -0.1 else 'neu')};">
                             {brief.get('sentiment_label', 'Neutral').title()}
                         </div>
@@ -155,6 +159,10 @@ def render_email(brief: dict, store: dict, today: str) -> str:
                         </div>
                     </div>
                 </div>
+
+                <!-- Headlines -->
+                <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #9e9c96; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; margin-bottom: 16px; margin-top: 32px;">Today's Headlines</h2>
+                {hl_items}
 
                 <!-- Summaries -->
                 <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #9e9c96; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; margin-bottom: 16px;">How today affects your job search</h2>
@@ -174,21 +182,19 @@ def render_email(brief: dict, store: dict, today: str) -> str:
                     <p style="margin:0; font-size:14px; color:#4a4840; line-height:1.5;">{brief.get('summary_neutral', '')}</p>
                 </div>
 
-                <!-- Headlines -->
-                <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #9e9c96; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; margin-bottom: 16px; margin-top: 32px;">Today's Headlines</h2>
-                {hl_items}
+                
 
                 <!-- Expandable Sections -->
                 <div style="margin-top: 32px;">
                     <details class="details-box">
-                        <summary>Expand Market Outlook</summary>
+                        <summary>Market Outlook</summary>
                         <div class="details-content">
                             {sections_html}
                         </div>
                     </details>
                     
                     <details class="details-box">
-                        <summary>Expand Market Dynamics</summary>
+                        <summary>Market Dynamics</summary>
                         <div class="details-content">
                             {entries_html}
                         </div>
@@ -199,8 +205,8 @@ def render_email(brief: dict, store: dict, today: str) -> str:
             
             <!-- Footer -->
             <div class="footer">
-                <p style="margin: 0;">Information is curated and analysed with AI.</p>
-                <p style="margin: 8px 0 0;"><a href="#" style="color:#b20710; text-decoration:none;">Unsubscribe</a></p>
+                <p style="margin: 0;">Information is curated and analysed with AI. AI can make mistakes</p>
+                
             </div>
         </div>
     </div>

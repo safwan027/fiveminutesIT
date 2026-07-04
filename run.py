@@ -16,9 +16,6 @@ from brief import generate_brief
 from shift import detect_shift
 from para_a import update_para_a
 from changelog import append_changelog
-from renderer import render_all
-from publisher import publish
-from alerter import send_alert
 from email_renderer import render_email
 from newsletter import send_newsletter
 
@@ -36,7 +33,7 @@ def run_pipeline():
     ist = timezone(timedelta(hours=5, minutes=30))
     today = datetime.now(ist).date().isoformat()
     print(f"\n{'='*50}")
-    print(f"5minIT Pipeline — {today}")
+    print(f"AI Newsletter Pipeline — {today}")
     print(f"{'='*50}\n")
 
     # ── 1. Load context store ──────────────────────────────
@@ -136,14 +133,14 @@ def run_pipeline():
 
     # ── 7. Render + publish ───────────────────────────────
     print("[7/7] Rendering HTML and publishing...")
-    render_all(store, brief, today, OUTPUT_PATH)
+    #render_all(store, brief, today, OUTPUT_PATH)
     # publish(OUTPUT_PATH, para_a_changed)
 
     # ── 8. Send Newsletter ────────────────────────────────
     print("[8/8] Generating and sending email newsletter...")
     try:
         email_html = render_email(brief, store, today)
-        send_newsletter(f"[5minIT] Daily IT Job Market Brief — {today}", email_html)
+        send_newsletter(f"fiveminutesIT - {today}", email_html)
     except Exception as e:
         print(f"  ERROR sending newsletter: {e}\n{traceback.format_exc()}")
 
