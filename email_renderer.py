@@ -22,6 +22,7 @@ def _geo_badge(geo: str) -> str:
 
 def render_email(brief: dict, store: dict, today: str) -> str:
     score = brief["sentiment_score"]
+    sentiment_7d_avg = brief["sentiment_7d_avg"]
     pct = int((score + 1) / 2 * 100)
     
     # --- Headers ---
@@ -143,20 +144,23 @@ def render_email(brief: dict, store: dict, today: str) -> str:
                 <!-- Metrics -->
                 <div style="display:flex; justify-content:space-between; margin-bottom: 24px; border:1px solid #e0e0e0; border-radius:8px; padding:16px;">
                     <div style="text-align:center; width:50%; border-right:1px solid #e0e0e0;">
-                    
+
                         <div style="font-size:12px; color:#6b6860; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Market Mood</div>
                         <div style="font-size:24px; font-weight:bold; color:{_impact_color('pos' if score > 0.1 else 'neg' if score < -0.1 else 'neu')};">
                             {brief.get('sentiment_label', 'Neutral').title()}
-                        </div>
-                        <div style="font-size:24px; font-weight:bold; color:{_impact_color('pos' if score > 0.1 else 'neg' if score < -0.1 else 'neu')};">
-                            {brief.get('sentiment_label', 'Neutral').title()}
-                        </div>
+                        </div>            
                     </div>
                     <div style="text-align:center; width:50%;">
                         <div style="font-size:12px; color:#6b6860; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Sentiment Score</div>
                         <div style="font-size:24px; font-weight:bold; color:#4a4840;">
-                            {score:+.2f}
+                            {brief.get('sentiment_label', 'Neutral').title()}
                         </div>
+                    </div>
+                    <div style="text-align:center; width:50%;">
+                        <div style="font-size:12px; color:#6b6860; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">7-Day Average Score</div>
+                        <div style="font-size:24px; font-weight:bold; color:#4a4840;">
+                            {store["sentiment_7d_avg"]:+.2f}
+                        </div>  
                     </div>
                 </div>
 
@@ -205,7 +209,7 @@ def render_email(brief: dict, store: dict, today: str) -> str:
             
             <!-- Footer -->
             <div class="footer">
-                <p style="margin: 0;">Information is curated and analysed with AI. AI can make mistakes</p>
+                <p style="margin: 0;">Information is curated and analysed with AI and can make mistakes</p>
                 
             </div>
         </div>

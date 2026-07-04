@@ -32,8 +32,7 @@ def run_pipeline():
     # today = date.today().isoformat()
     ist = timezone(timedelta(hours=5, minutes=30))
     today = datetime.now(ist).date().isoformat()
-    print(f"\n{'='*50}")
-    print(f"AI Newsletter Pipeline — {today}")
+    print(f"fiveminutesIT Pipeline ")
     print(f"{'='*50}\n")
 
     # ── 1. Load context store ──────────────────────────────
