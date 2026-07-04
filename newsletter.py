@@ -21,11 +21,13 @@ def _read_subscribers() -> list:
 
 def send_newsletter(subject: str, html_content: str):
     subscribers = _read_subscribers()
+    print(subscribers)
     if not subscribers:
         print("  [Newsletter skipped] No subscribers found.")
         return
 
     resend_key = os.getenv("RESEND_API_KEY")
+    print(resend_key)
     if resend_key:
         print(f"  Sending newsletter via Resend to {len(subscribers)} subscribers...")
         _send_via_resend(resend_key, subscribers, subject, html_content)
@@ -40,13 +42,16 @@ def _send_via_resend(api_key: str, to_emails: list, subject: str, html_body: str
     # To keep it private, we can use BCC or send individual emails. 
     # For simplicity, we send via 'bcc' here to avoid everyone seeing each other's emails.
     try:
-        payload = json.dumps({
-            "from": "newsletter@resend.dev", # Should be a verified domain in a real setup
+        payload_dict = {
+            "from": "onboarding@resend.dev", # Resend's free tier default
             "to": [to_emails[0]], # First email as 'to'
-            "bcc": to_emails[1:], # Rest as 'bcc'
             "subject": subject,
-            "html": html_body,
-        }).encode("utf-8")
+            "html": html_body,   
+        }
+        if len(to_emails) > 1:
+            payload_dict["to"] = to_emails[1:]
+            
+        payload = json.dumps(payload_dict).encode("utf-8")
 
         req = urllib.request.Request(
             "https://api.resend.com/emails",
@@ -58,9 +63,9 @@ def _send_via_resend(api_key: str, to_emails: list, subject: str, html_body: str
         )
 
         with urllib.request.urlopen(req, timeout=15) as resp:
-            print(f"  ✓ Newsletter successfully sent via Resend.")
+            print(f"  [SUCCESS] Newsletter successfully sent via Resend.")
     except Exception as e:
-        print(f"  ✗ Newsletter failed (Resend): {e}")
+        print(f"  [ERROR] Newsletter failed (Resend): {e}")
 
 def _send_via_smtp(to_emails: list, subject: str, html_body: str):
     smtp_host = os.environ.get("SMTP_HOST", "smtp.gmail.com")
@@ -83,7 +88,7 @@ def _send_via_smtp(to_emails: list, subject: str, html_body: str):
             server.starttls()
             server.login(smtp_user, smtp_pass)
             server.sendmail(smtp_user, to_emails, msg.as_string())
-        print(f"  ✓ Newsletter successfully sent via SMTP to {len(to_emails)} subscribers.")
+        print(f"  [SUCCESS] Newsletter successfully sent via SMTP to {len(to_emails)} subscribers.")
     except Exception as e:
-        print(f"  ✗ Newsletter failed (SMTP): {e}")
+        print(f"  [ERROR] Newsletter failed (SMTP): {e}")
 

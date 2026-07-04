@@ -23,11 +23,11 @@ from email_renderer import render_email
 from newsletter import send_newsletter
 
 BASE = Path(__file__).parent.parent
-STORE_PATH = BASE/ "5minIT" / "data" / "context.json"
-OUTPUT_PATH = BASE/"5minIT" / "output"
+# STORE_PATH = BASE/ "5minIT" / "data" / "context.json"
+# OUTPUT_PATH = BASE/"5minIT" / "output"
 
-# STORE_PATH = BASE/ "data" / "context.json"
-# OUTPUT_PATH = BASE/ "output" 
+STORE_PATH = BASE/ "data" / "context.json"
+OUTPUT_PATH = BASE/ "output" 
 
 
 
