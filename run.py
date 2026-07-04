@@ -19,6 +19,8 @@ from changelog import append_changelog
 from renderer import render_all
 from publisher import publish
 from alerter import send_alert
+from email_renderer import render_email
+from newsletter import send_newsletter
 
 BASE = Path(__file__).parent.parent
 STORE_PATH = BASE/ "5minIT" / "data" / "context.json"
@@ -136,6 +138,14 @@ def run_pipeline():
     print("[7/7] Rendering HTML and publishing...")
     render_all(store, brief, today, OUTPUT_PATH)
     # publish(OUTPUT_PATH, para_a_changed)
+
+    # ── 8. Send Newsletter ────────────────────────────────
+    print("[8/8] Generating and sending email newsletter...")
+    try:
+        email_html = render_email(brief, store, today)
+        send_newsletter(f"[5minIT] Daily IT Job Market Brief — {today}", email_html)
+    except Exception as e:
+        print(f"  ERROR sending newsletter: {e}\n{traceback.format_exc()}")
 
     print(f"\n✓ Pipeline complete — {datetime.now().strftime('%H:%M:%S')}\n")
 
