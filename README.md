@@ -64,9 +64,32 @@ python run.py
 
 ### Automation
 
-For daily automation, set up a cron job. For example, to run every day at 12:01 AM:
+1. For daily automation, you can set up a cron job locally. For example, to run every day at 12:01 AM:
 ```cron
 1 0 * * * cd /path/to/5minIT && /path/to/5minIT/myvenv/bin/python run.py
 ```
+
+2. This project includes a GitHub Actions workflow (`.github/workflows/daily-brief.yml`) that runs the pipeline automatically every day.
+
+To set up the GitHub Actions workflow:
+1. Go to your GitHub repository **Settings** > **Secrets and variables** > **Actions**.
+2. Click **New repository secret** and add the following secrets:
+   - `GEMINI_API_KEY`: Your Gemini API key.
+   - `RESEND_API_KEY`: Your Resend API key.
+   - `ALERT_EMAIL`: The email address to receive pipeline logs and alerts.
+3. Make sure GitHub Actions has permission to push changes to the repository:
+   - Go to **Settings** > **Actions** > **General**.
+   - Under **Workflow permissions**, select **Read and write permissions** and click **Save**.
+
+
+##Contributing
+We welcome contributions to make fiveminuteIT even better!
+
+How to Contribute
+Fork the repository.
+Create your feature branch: git checkout -b feature/amazing-feature
+Commit your changes: git commit -m 'Add amazing feature'
+Push to the branch: git push origin feature/amazing-feature
+Open a Pull Request!
 
 .
