@@ -98,7 +98,7 @@ Analyse these {len(headlines)} headlines and produce the JSON brief.
 
 {formatted}
 
-keep minimum 6 - 7 headlines, not everything has to be related to job prospects, keep the 
+keep maximum 6 - 8 headlines, not everything has to be related to job prospects, keep the 
 market signal headlines as well, in brief also include the normal IT headlines too.
 
 For each headline:
