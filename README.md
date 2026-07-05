@@ -75,11 +75,6 @@ This service is designed to run completely hands-off via GitHub Actions.
 
 Ensure your `.github/workflows/daily-brief.yml` file is configured to run the pipeline automatically via `cron` schedule.
 
-Option: 2
-For daily automation, you can set up a cron job locally. For example, to run every day at 12:01 AM:
-```cron
-1 0 * * * cd /path/to/5minIT && /path/to/5minIT/myvenv/bin/python run.py
-```
 
 ## Tuning Parameters
 
@@ -95,9 +90,9 @@ All tunable parameters live in `5minIT files/data/context.json` under `config`â€
 
 ## Contributing
 
-We welcome contributions to make 5minIT even better!
+We welcome contributions to make fiveminuteIT even better!
 
-### How to Contribute
+## How to Contribute
 1. Fork the repository.
 2. Create your feature branch: `git checkout -b feature/amazing-feature`
 3. Commit your changes: `git commit -m 'Add amazing feature'`
