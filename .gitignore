@@ -1,7 +1,6 @@
 myvenv
 .env
-__pycache__/ 
+__pycache__
 CLAUDE.md    
-/tests/
-.pytest_cache
+
 

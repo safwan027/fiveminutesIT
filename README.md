@@ -54,6 +54,9 @@ The project uses Python and relies on the following key libraries:
 5. **Data Initialization:**
    Ensure `data/context.json` is properly initialized as required by the `store.py` module.
 
+5. **Subscribers:**
+   Ensure `data/subscribers.txt` is properly initialized as required by the `newsletter.py` module. (Add your email address in the `data/subscribers.txt` file)
+
 ## Usage
 
 To run the pipeline manually, execute the main script:
@@ -90,7 +93,11 @@ All tunable parameters live in `5minIT files/data/context.json` under `config`â€
 
 ## Contributing
 
+<<<<<<< HEAD
+We welcome contributions to make fiveminutesIT even better!
+=======
 We welcome contributions to make fiveminuteIT even better!
+>>>>>>> 738b1d6fb62d7095da56a71799e19833f6bb098d
 
 ## How to Contribute
 1. Fork the repository.
