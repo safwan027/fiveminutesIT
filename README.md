@@ -64,7 +64,6 @@ python run.py
 
 ## Deployment (GitHub Actions)
 
-Option: 1
 This service is designed to run completely hands-off via GitHub Actions.
 
 1. Push your repository to GitHub.

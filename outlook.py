@@ -87,7 +87,7 @@ No preamble, no explanation, no markdown fences."""
             # new_sections_raw = json.loads(clean)
 
             response = client.chat.completions.create(
-                model="gemini-3.5-flash",
+                model="gemini-2.5-flash-lite",
                 messages=[{"role": "user", "content": prompt}],
             )
             raw = response.choices[0].message.content
