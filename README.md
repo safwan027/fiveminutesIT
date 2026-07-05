@@ -90,7 +90,7 @@ All tunable parameters live in `5minIT files/data/context.json` under `config`â€
 
 ## Contributing
 
-We welcome contributions to make 5minIT even better!
+We welcome contributions to make fiveminuteIT even better!
 
 ## How to Contribute
 1. Fork the repository.
