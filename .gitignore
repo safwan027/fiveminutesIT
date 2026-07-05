@@ -1,8 +1,6 @@
 myvenv
 .env
-__pycache__/
-test_render.py  
-dummy-test.yml
+__pycache__/ 
 CLAUDE.md    
 /tests/
 .pytest_cache
