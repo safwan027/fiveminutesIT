@@ -1,4 +1,3 @@
-
 """
 mailer.py — Send the daily brief as a newsletter to hardcoded recipients
 """
@@ -14,9 +13,6 @@ from pathlib import Path
 BASE = Path(__file__).parent.parent
 SUBSCRIBERS_PATH = BASE / "fiveminutesIT" / "data" / "subscribers.txt"
 
-# RECIPIENTS = [
-#     "safwannasar0@gmail.com"
-# ]
 
 RECIPIENTS = []
 

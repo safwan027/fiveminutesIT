@@ -20,7 +20,7 @@ from email_renderer import render_email
 from newsletter import send_newsletter
 
 BASE = Path(__file__).parent.parent
-STORE_PATH = BASE/ "fiveminuteIT" / "data" / "context.json"
+STORE_PATH = BASE/ "fiveminutesIT" / "data" / "context.json"
 
 
 
@@ -28,7 +28,6 @@ STORE_PATH = BASE/ "fiveminuteIT" / "data" / "context.json"
 
 
 def run_pipeline():
-    # today = date.today().isoformat()
     ist = timezone(timedelta(hours=5, minutes=30))
     today = datetime.now(ist).date().isoformat()
     print(f"fiveminutesIT Pipeline ")
@@ -54,7 +53,6 @@ def run_pipeline():
         store["last_run_date"] = today
         store["last_run_status"] = "failed"
         save_store(STORE_PATH, store)
-        # send_alert("Pipeline FAILED — scrape step", msg)
         sys.exit(1)
 
     if len(headlines) < store["config"]["min_headlines"]:
@@ -63,7 +61,6 @@ def run_pipeline():
         store["last_run_date"] = today
         store["last_run_status"] = "failed"
         save_store(STORE_PATH, store)
-        # send_alert("Pipeline ABORTED — too few headlines", msg)
         sys.exit(1)
 
     # ── 3. Generate brief via Claude ──────────────────────
@@ -78,7 +75,6 @@ def run_pipeline():
         store["last_run_date"] = today
         store["last_run_status"] = "partial"
         save_store(STORE_PATH, store)
-        # send_alert("Pipeline FAILED — Claude brief step", msg)
         sys.exit(1)
 
     # ── 4. Detect market shift ────────────────────────────
@@ -105,8 +101,6 @@ def run_pipeline():
         except Exception as e:
             msg = f"outlook update failed: {e}\n{traceback.format_exc()}"
             print(f"  ERROR: {msg}")
-            # send_alert("outlook update failed (non-fatal)", msg)
-            # Non-fatal — continue with old outlook
             append_dynamic(store, store["outlook"], shift_result, today,
                              failed=True)
     else:
@@ -123,19 +117,8 @@ def run_pipeline():
     store["last_run_headline_count"] = len(headlines)
     save_store(STORE_PATH, store)   
 
-    # Save daily brief JSON
-    # daily_path = OUTPUT_PATH / "daily" / f"{today}.json"
-    # daily_path.parent.mkdir(parents=True, exist_ok=True)
-    # daily_path.write_text(json.dumps(brief, indent=2, ensure_ascii=False))
-    # print(f"Daily brief saved: {daily_path}")
-
-    # ── 7. Render + publish ───────────────────────────────
-    print("[7/7] Rendering HTML and publishing...")
-    #render_all(store, brief, today, OUTPUT_PATH)
-    # publish(OUTPUT_PATH, para_a_changed)
-
-    # ── 8. Send Newsletter ────────────────────────────────
-    print("[8/8] Generating and sending email newsletter...")
+    # ── 7. Send Newsletter ────────────────────────────────
+    print("[7/7] Generating and sending email newsletter...")
     try:
         email_html = render_email(brief, store, today)
         send_newsletter(f"fiveminutesIT - {today}", email_html)
