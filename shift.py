@@ -13,7 +13,7 @@ def detect_shift(store: dict, today_score: float,
     threshold = config["shift_threshold"]
     window    = config["sentiment_window_days"]
 
-    recent_scores = [e["score"] for e in history[-window:]]
+    recent_scores = [float(e["score"]) for e in history[-window:] if e.get("score") not in ("", None)]
 
     # ── Check 1: Statistical deviation from rolling average ──
     if len(recent_scores) >= 3:

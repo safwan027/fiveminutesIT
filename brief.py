@@ -69,10 +69,19 @@ def build_context_block(store: dict) -> str:
     recent = store["sentiment_history"][-7:]
     if recent:
         sentiment_lines = "\n".join(
-            f"  {e['date']}: {e['score']:+.2f} ({e['label']})" for e in recent
+            [
+    f"  {e['date']}: {float(e['score']):+.2f} ({e['label']})" 
+    for e in recent 
+    if e.get("score") not in ("", None) 
+    and e.get("date") not in ("", None) 
+    and e.get("label") not in ("", None)
+]
         )
     else:
         sentiment_lines = "  No history yet — first run."
+
+
+
 
     return f"""## Current broader market context (outlook)
 Use this as background lens. Do not summarise or rewrite it — just use it when judging each headline.

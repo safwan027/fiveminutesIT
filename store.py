@@ -160,8 +160,8 @@ def append_sentiment(store: dict, today: str, score: float,
 
     # Recompute rolling stats
     window = store["config"]["sentiment_window_days"]
-    recent = [e["score"] for e in store["sentiment_history"][-window:]]
-    store["sentiment_7d_avg"] = round(statistics.mean(recent), 3)
+    recent = [float(e["score"]) for e in store["sentiment_history"][-window:] if e.get("score") not in ("", None)]
+    store["sentiment_7d_avg"] = round(statistics.mean(recent), 3) if recent else 0.0
     store["sentiment_7d_std"] = (
         round(statistics.stdev(recent), 3) if len(recent) > 1 else 0.0
     )
