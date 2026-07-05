@@ -1,62 +1,62 @@
-# name: 5minIT
+name: fiveminuteIT
 
-# on:
-#   schedule:
-#     # 12:01 AM IST = 6:31 PM UTC (previous day)
-#     - cron: '31 18 * * *'
-#   workflow_dispatch:  # Allow manual trigger from GitHub UI
+on:
+  schedule:
+    # 12:01 AM IST = 6:31 PM UTC (previous day)
+    - cron: '31 18 * * *'
+  workflow_dispatch:  # Allow manual trigger from GitHub UI
 
-# jobs:
-#   run-pipeline:
-#     runs-on: ubuntu-latest
-#     timeout-minutes: 15
-#     permissions:
-#       contents: write 
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write 
 
-#     steps:
-#       - name: Checkout pipeline repo
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
+    steps:
+      - name: Checkout pipeline repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-#       - name: Set up Python
-#         uses: actions/setup-python@v5
-#         with:
-#           python-version: '3.11'
-#           cache: 'pip'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
 
-#       - name: Install dependencies
-#         run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-#       - name: Restore context store
-#         uses: actions/cache/restore@v4
-#         with:
-#           path: data/context.json
-#           key: context-store-${{ github.run_id }}
-#           restore-keys: |
-#             context-store-
+      - name: Restore context store
+        uses: actions/cache/restore@v4
+        with:
+          path: data/context.json
+          key: context-store-${{ github.run_id }}
+          restore-keys: |
+            context-store-
 
-#       - name: Run pipeline
-#         env:
-#           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-#           ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
-#           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-#           WEBSITE_REPO_PATH: ${{ github.workspace }}
-#         run: |
-#           mkdir -p data logs
-#           python run.py 2>&1 | tee logs/pipeline.log
+      - name: Run pipeline
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          WEBSITE_REPO_PATH: ${{ github.workspace }}
+        run: |
+          mkdir -p data logs
+          python run.py 2>&1 | tee logs/pipeline.log
 
-#       - name: Save context store
-#         uses: actions/cache/save@v4
-#         if: always()
-#         with:
-#           path: data/context.json
-#           key: context-store-${{ github.run_id }}
+      - name: Save context store
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: data/context.json
+          key: context-store-${{ github.run_id }}
 
-#       - name: Upload pipeline log
-#         uses: actions/upload-artifact@v4
-#         if: always()
-#         with:
-#           name: pipeline-log-${{ github.run_id }}
-#           path: logs/pipeline.log
-#           retention-days: 30
+      - name: Upload pipeline log
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pipeline-log-${{ github.run_id }}
+          path: logs/pipeline.log
+          retention-days: 30
