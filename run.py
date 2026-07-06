@@ -63,12 +63,12 @@ def run_pipeline():
         save_store(STORE_PATH, store)
         sys.exit(1)
 
-    # ── 3. Generate brief via Claude ──────────────────────
-    print("[3/7] Generating brief (Claude API)...")
+    # ── 3. Generate brief via gemini ──────────────────────
+    print("[3/7] Generating brief (gemini API)...")
     try:
         brief = generate_brief(store, headlines, today)
         print(f"  Sentiment: {brief['sentiment_label']} ({brief['sentiment_score']:+.2f})")
-        print(f"  Claude shift flag: {brief['shift_detected']}")
+        print(f"  gemini shift flag: {brief['shift_detected']}")
     except Exception as e:
         msg = f"Brief generation failed: {e}\n{traceback.format_exc()}"
         print(f"  ERROR: {msg}")

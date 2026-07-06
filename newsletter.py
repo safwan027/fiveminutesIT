@@ -14,7 +14,7 @@ BASE = Path(__file__).parent.parent
 SUBSCRIBERS_PATH = BASE / "fiveminutesIT" / "data" / "subscribers.txt"
 
 
-RECIPIENTS = []
+recipients = []
 
 def _read_subscribers() -> list:
     if not SUBSCRIBERS_PATH.exists():
@@ -29,10 +29,12 @@ def send_newsletter(subject: str, html_content: str):
     """Send the newsletter to all hardcoded recipients."""
     load_dotenv()
 
-    RECIPIENTS = _read_subscribers()
-    print("RECIPIENTS",RECIPIENTS)
+    rec = _read_subscribers()
+    for i in range(len(rec)):
+        recipients.append(rec[i])
+    print("RECIPIENTS",recipients)
 
-    if not RECIPIENTS:
+    if not recipients:
         print("  [Newsletter skipped] No subscribers found.")
         return
         
@@ -45,8 +47,8 @@ def send_newsletter(subject: str, html_content: str):
 
 def _send_via_resend(subject: str, html_content: str):
     success_count = 0
-    print("RECIPIENTS",RECIPIENTS)
-    for to_email in RECIPIENTS:
+    print("RECIPIENTS",recipients)
+    for to_email in recipients:
         try:
             resend.Emails.send(
                 {
@@ -81,7 +83,7 @@ def _send_via_smtp(subject: str, html_content: str):
             server.login(smtp_user, smtp_pass)
             
             success_count = 0
-            for to_email in RECIPIENTS:
+            for to_email in recipients:
                 try:
                     msg = MIMEMultipart("alternative")
                     msg["Subject"] = subject

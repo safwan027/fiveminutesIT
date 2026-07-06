@@ -1,13 +1,13 @@
 """
 shift.py — Three-check shift detector
-Checks: statistical deviation | Claude flag | streak
+Checks: statistical deviation | gemini flag | streak
 """
 
 import statistics
 
 
 def detect_shift(store: dict, today_score: float,
-                 today_label: str, claude_flag: bool) -> dict:
+                 today_label: str, gemini_flag: bool) -> dict:
     history = store["sentiment_history"]
     config  = store["config"]
     threshold = config["shift_threshold"]
@@ -30,10 +30,10 @@ def detect_shift(store: dict, today_score: float,
         effective_threshold = threshold
         score_triggered = deviation > threshold
 
-    # ── Check 2: Claude's semantic shift flag ─────────────
-    # Claude sees headlines + outlook together — catches
+    # ── Check 2: gemini's semantic shift flag ─────────────
+    # gemini sees headlines + outlook together — catches
     # qualitative shifts that don't move the aggregate score
-    flag_triggered = bool(claude_flag)
+    flag_triggered = bool(gemini_flag)
 
     # ── Check 3: 3-day confirmed streak ───────────────────
     # Catches slow drifts no single day would trigger

@@ -1,5 +1,5 @@
 """
-brief.py — Generate daily brief via Claude API
+brief.py — Generate daily brief via gemini API
 Three-layer prompt: system → context → task
 """
 
@@ -163,7 +163,7 @@ def generate_brief(
             print(f"  Gemini API call (attempt {attempt}/{max_retries})...")
 
             response = client.chat.completions.create(
-        model="gemini-2.5-flash-lite", # Or gemini-2.5-pro
+        model="gemini-3.0-flash", 
         messages=[
             {"role": "system", "content": system},
             {"role": "user", "content": user_message}

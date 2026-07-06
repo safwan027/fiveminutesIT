@@ -53,7 +53,7 @@ def append_dynamic(
         )
         return store
 
-    # Generate semantic diff via Claude
+    # Generate semantic diff via gemini
     entry = _generate_diff_entry(store, old_outlook, shift_result, today)
     store["dynamic"].append(entry)
     return store
@@ -123,7 +123,7 @@ Rules:
             # raw = response.content[0].text
 
             response = client.chat.completions.create(
-                model="gemini-2.5-flash-lite",
+                model="gemini-3.0-flash",
                 messages=[{"role": "user", "content": prompt}],
             )
             raw = response.choices[0].message.content

@@ -36,7 +36,7 @@ def update_outlook(
         f"Severity: {shift_result['severity']}\n"
         f"Score deviation: {shift_result['deviation']} "
         f"(threshold: {shift_result['effective_threshold']})\n"
-        f"Claude shift flag: {shift_result['flag_triggered']}\n"
+        f"gemini shift flag: {shift_result['flag_triggered']}\n"
         f"Streak triggered: {shift_result['streak_triggered']}"
     )
 
@@ -87,7 +87,7 @@ No preamble, no explanation, no markdown fences."""
             # new_sections_raw = json.loads(clean)
 
             response = client.chat.completions.create(
-                model="gemini-2.5-flash-lite",
+                model="gemini-3.0-flash",
                 messages=[{"role": "user", "content": prompt}],
             )
             raw = response.choices[0].message.content
