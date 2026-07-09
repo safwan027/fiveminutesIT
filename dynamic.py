@@ -123,7 +123,7 @@ Rules:
             # raw = response.content[0].text
 
             response = client.chat.completions.create(
-                model="gemini-3.0-flash",
+                model="gemini-2.5-flash-lite",
                 messages=[{"role": "user", "content": prompt}],
             )
             raw = response.choices[0].message.content

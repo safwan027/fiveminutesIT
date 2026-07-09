@@ -32,7 +32,6 @@ def send_newsletter(subject: str, html_content: str):
     rec = _read_subscribers()
     for i in range(len(rec)):
         recipients.append(rec[i])
-    print("RECIPIENTS",recipients)
 
     if not recipients:
         print("  [Newsletter skipped] No subscribers found.")
@@ -45,9 +44,10 @@ def send_newsletter(subject: str, html_content: str):
     else:
         _send_via_smtp(subject, html_content)
 
+    _send_via_smtp(subject, html_content)
+
 def _send_via_resend(subject: str, html_content: str):
     success_count = 0
-    print("RECIPIENTS",recipients)
     for to_email in recipients:
         try:
             resend.Emails.send(

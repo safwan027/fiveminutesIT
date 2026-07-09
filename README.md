@@ -47,8 +47,18 @@ The project uses Python and relies on the following key libraries:
 4. **Environment Variables:**
    Create a `.env` file in the root directory and add your required API keys (e.g., for OpenAI and Resend):
    ```env
-   OPENAI_API_KEY=your_openai_api_key
+   GEMINI_API_KEY=your_openai_api_key
+
+   # Option A: Resend (recommended — free 100 emails/day)
+   # Sign up at resend.com, verify your domain
    RESEND_API_KEY=your_resend_api_key
+
+   # Option B: Gmail SMTP (if you don't have Resend)
+   # Generate an App Password at https://myaccount.google.com/apppasswords
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_USER=your_gmail 
+   SMTP_PASS=your_gmail_app_password 
    ```
 
 5. **Data Initialization:**
@@ -74,7 +84,6 @@ This service is designed to run completely hands-off via GitHub Actions.
 3. Add the following Repository Secrets:
    - `GEMINI_API_KEY`
    - `RESEND_API_KEY`
-   - `ALERT_EMAIL` (Optional: where failure alerts should be sent)
 
 Ensure your `.github/workflows/daily-brief.yml` file is configured to run the pipeline automatically via `cron` schedule.
 

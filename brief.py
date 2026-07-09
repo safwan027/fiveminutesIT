@@ -163,7 +163,7 @@ def generate_brief(
             print(f"  Gemini API call (attempt {attempt}/{max_retries})...")
 
             response = client.chat.completions.create(
-        model="gemini-3.0-flash", 
+        model="gemini-2.5-flash-lite", 
         messages=[
             {"role": "system", "content": system},
             {"role": "user", "content": user_message}
