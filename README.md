@@ -27,7 +27,7 @@ The project uses Python and relies on the following key libraries:
 1. **Clone the repository:**
    ```bash
    git clone <repository-url>
-   cd 5minIT
+   cd fiveminutesIT
    ```
 
 2. **Create a virtual environment (optional but recommended):**
@@ -90,7 +90,7 @@ Ensure your `.github/workflows/daily-brief.yml` file is configured to run the pi
 
 ## Tuning Parameters
 
-All tunable parameters live in `5minIT files/data/context.json` under `config`—you can edit these values without touching code:
+All tunable parameters live in `fiveminutesIT files/data/context.json` under `config`—you can edit these values without touching code:
 
 | Field | Default | Effect |
 |-------|---------|--------|
